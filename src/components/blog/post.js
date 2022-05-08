@@ -3,12 +3,15 @@ import {useState,useEffect} from 'react';
 import { useParams } from "react-router-dom";
 import App4 from '../navbar/navBar'
 import './post.css'
+import Comment from '../comments/commentAdd'
 function Post()
 {
     const {id} = useParams();
-  
+    
+
     const [post, setPost] = useState([]);
-  
+    
+
 
     useEffect(() => {
             fetch(`http://127.0.0.1:8000/api/posts/${id}/`)
@@ -20,8 +23,8 @@ function Post()
      
 
  
-        console.log(post.comments)
-        const comments = post.comments || {};
+
+        const photos = post.photos ||{};
 
     return(
         <div>  
@@ -32,26 +35,29 @@ function Post()
                     
                     <h3 class = 'display-4'> Tytuł: {post.title}  </h3> 
                         <p >{post.content}</p> 
-                     
-                      
-                 </div> 
-                <div>
-                    <h2>Komentarze:</h2>
-                    {Object.values(comments).map(coment=>(
+                        {Object.values(photos).map(photo=>(
                         <div>
-                            <h4>{coment.User}</h4>
-                            <h6>{coment.content}</h6>
-                            <p></p>
+                           <img src = {photo.photos.thumbnail}></img>
                             </div>
                     )
 
                         )}
+                        
+                      
+                 </div> 
+            <div>
+                 
+                     <Comment numer = {id}/>
+
+                   
+                 
+
                 </div>
-       
+            </div>       
                          
                  
                  
-            </div>
+            
         
         )
 
