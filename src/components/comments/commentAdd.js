@@ -1,44 +1,49 @@
-import { useState,useReducer, useEffect } from "react";
+import { useState,useEffect,useReducer } from "react";
 import React from 'react';
 import { useHistory } from "react-router-dom";
 import CommentsView from './commentsView'
+
 function Comment(params)
 {
-    const [reducerValue,forceUpdate] = useReducer(x=>x+1,0);
-    const firstRender =React.useRef(true);
-    const [val,setVal] = useState(0);
-    const increase = () => setVal(val + 1);
-
+    const [comment,setComment] = useState([])
 
     const [content, setContent] = useState('');
     const [User,setUser] = useState('');
-    const post = `http://127.0.0.1:8000/api/posts/${params.numer}/`
+    const post = params.numer;
     const[isPending,setIsPending] = useState(false);
-    const history = useHistory();
+  
+    useEffect(() => {
+        const fetchData = async () => {
+        const result = await fetch(`http://127.0.0.1:8000/comments/post/${params.numer}/`)
+        const jsonResult = await result.json()
+        
+        
+        setComment(jsonResult)
+        }
+     fetchData();
+    
+
+    },[]);
+
+   
+
     const handleSubmit = async(e) => {
         e.preventDefault();
-        const comments = { content, User, post };
+        const commentts = { content, User, post };
         setIsPending(true)
         const result =await fetch('http://127.0.0.1:8000/api/comment/', {
           method: 'POST',
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(comments)
+          body: JSON.stringify(commentts)
         }).catch((error) =>{
           setIsPending(false)
       })
-      setVal(val + 1);
+
+        const newComment= await result.json()
+        setComment(oldComment => [newComment,...oldComment])
      
  }
-      useEffect(()=>{
-          if (firstRender.current){
-              firstRender.current = false;
-              console.log("first render");
-
-          }else{
-              console.log('re-render')
-          }
-      }
-      )
+      
 
 
 
@@ -47,7 +52,7 @@ function Comment(params)
       return(
           <div class = 'container'>
             <div>
-                <form onSubmit={handleSubmit}> 
+                <form> 
                     <div>
                         <label> Nazwa uzytkowika</label>
                         <input 
@@ -67,15 +72,29 @@ function Comment(params)
                         />
                     </div>
                     <center>
-                    {!isPending && <button  onClick = {increase} id='shadow-add'  type ='submit' class = 'btn btn-primary'>Dodaj komentarz</button>}
-                    { isPending && <button   disabled type = 'submit' class = 'btn btn-primary'>Dodawanie...</button>}
+                    {!isPending && <button onClick= {handleSubmit}  id='shadow-add'  type ='submit' class = 'btn btn-primary'>Dodaj komentarz</button>}
+                    { isPending && <button   disabled type = 'submit' class = 'btn btn-primary'>Dodano komentarz</button>}
                     
                     </center>
                     
                     </form>
             </div>  
 
-                    <CommentsView post_id = {params.numer} red = {reducerValue}/>
+            <div>
+                    <h2>Komentarze:</h2>
+                    {comment.map(coment=>
+                    (
+                            <div key = {coment.id}>
+                                <h4>{coment.User}</h4>
+                                <h6>{coment.content}</h6>
+                                <p></p>
+                            </div>
+                    )
+
+                                                )
+                    }
+
+        </div>
             <div>
                 
             </div>

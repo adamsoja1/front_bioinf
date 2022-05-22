@@ -1,27 +1,14 @@
 import { useState,useEffect } from "react";
 import React from 'react';
 
-function CommentsView(params){
-
-    const [post, setPost] = useState([]);
-    
- 
-
-    useEffect(() => {
-            fetch(`http://127.0.0.1:8000/api/posts/${params.post_id}/`)
-            .then(res => res.json())
-            .then((res)=> setPost(res))
-           
-          
-        },[]);
-
-    const comments = post.comments || {};
+function CommentsView(comment){              
+   const comments = comment;
     return(
         <div>
                     <h2>Komentarze:</h2>
-                    {Object.values(comments).map(coment=>
+                    {comments.map(coment=>
                     (
-                            <div>
+                            <div key = {coment.id}>
                                 <h4>{coment.User}</h4>
                                 <h6>{coment.content}</h6>
                                 <p></p>
