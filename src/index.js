@@ -2,19 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import App2 from './components/blog/blog'
-import App3 from './components/blog/add'
-
+import Home from './components/blog/blog'
+import Add from './components/blog/add'
+import About from './components/about/about'
 import Post from './components/blog/post'
 import { BrowserRouter as Router, Route
 } from "react-router-dom";
+import CreateMember from './components/about/aboutAdd';
 
 ReactDOM.render((
   <Router>
-    <Route exact path='/' render={App} />
-    <Route exact path='/blog' render ={App2}/>
-    <Route exact path = '/dodaj' render = {App3}/>
+    <Route exact path='/' component={Home} />
+    <Route exact path='/blog' component ={Home}/>
+    <Route exact path = '/dodaj' component = {Add}/>
     <Route exact path ='/post/:id' component ={Post}/>
+    <Route exact path = '/about' component = {About}/>
+    <Route exact path = '/about/create' component = {CreateMember}/>
   </Router>
   ),
   document.getElementById('root')

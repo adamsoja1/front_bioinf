@@ -1,7 +1,7 @@
 import { useState,useEffect,useReducer } from "react";
 import React from 'react';
 import { useHistory } from "react-router-dom";
-import CommentsView from './commentsView'
+
 
 function Comment(params)
 {

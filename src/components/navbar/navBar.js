@@ -12,16 +12,13 @@ class Navbar extends Component{
             <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/blog">Posty</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/dodaj">Dodaj post</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/">O nas</a>
+          <a class="nav-link" href="/About">O nas</a>
         </li>
         <li class="nav-item">
           <a class="nav-link "href='/'>Galeria</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link "href='/'>Wydarzenia</a>
         </li>
       </ul>
     </div>

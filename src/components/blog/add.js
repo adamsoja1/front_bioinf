@@ -78,7 +78,7 @@ const Create = () => {
   );
 }
 
-function App3() {
+function Add() {
   return (<div>
     <App4/>
     <div class ='mb-3'>
@@ -92,4 +92,4 @@ function App3() {
   )
 }
 
-export default App3;
+export default Add;
