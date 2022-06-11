@@ -1,17 +1,12 @@
 import React from 'react';
 import {useState,useEffect} from 'react';
 import App4 from '../navbar/navBar'
-
+import MemberPhoto from './aboutphoto'
 export default function About()
 
 {
-
-
-
-
+    const apiUrl = 'http://127.0.0.1:8000'
     const [users,setUsers] = useState([])
-
-
     useEffect(() => {
         fetch('http://127.0.0.1:8000/api/members/')
         .then(res => res.json())
@@ -20,7 +15,7 @@ export default function About()
       
     },[]);
 
-    
+  
     return (
         <div>
             <App4/>
@@ -34,7 +29,7 @@ export default function About()
                                 <h6>Stanowisko : {user.position}</h6>
                                 <h6>O sobie : {user.about}</h6>
                                 <h6>Email : {user.email}</h6>
-                                <p></p>
+                                <MemberPhoto id={user.id}/>
                             </div>
                     )
 

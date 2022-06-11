@@ -12,7 +12,6 @@ function App()
       <center>
         <Zegar/>
       </center>
-    
     </div>
   )
 }

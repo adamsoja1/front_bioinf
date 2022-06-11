@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import App4 from '../navbar/navBar'
 import './post.css'
 import Comment from '../comments/commentAdd'
+import Photos from  '../Gallery/photos'
 function Post()
 {
     const {id} = useParams();
@@ -35,16 +36,12 @@ function Post()
                     
                     <h3 class = 'display-4'> Tytuł: {post.title}  </h3> 
                         <p >{post.content}</p> 
-                        {Object.values(photos).map(photo=>(
-                        <div>
-                           <img src = {photo.photos.thumbnail}></img>
-                            </div>
-                    )
-
-                        )}
                         
                       
                  </div> 
+            <div>
+                <Photos id = {id}/>
+            </div>
             <div>
                  
                      <Comment numer = {id}/>
