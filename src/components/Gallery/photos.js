@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import './galer.css'
 import React from 'react';
-
+import FetchPhotos from './gallery'
 
 function Photos(params){
     const apiUrl = 'http://127.0.0.1:8000'
@@ -15,14 +15,16 @@ function Photos(params){
     },[])
     
     return(
-        <div>
+        <div className = 'parent'>
             {photos.map(photo =>(
-                <div class = 'gallery' >
+                <div class = 'gallery'>
                       <img src = {apiUrl + photo.photos.full_size}></img>
                 </div>
 
 
     ))}
+
+
         </div>
     )
 }

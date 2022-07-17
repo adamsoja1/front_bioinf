@@ -15,10 +15,10 @@ class Navbar extends Component{
           <a class="nav-link" href="/About">O nas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link "href='/'>Galeria</a>
+          <a class="nav-link "href='/gallery'>Galeria</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link "href='/'>Wydarzenia</a>
+          <a class="nav-link "href='/events'>Wydarzenia</a>
         </li>
       </ul>
     </div>

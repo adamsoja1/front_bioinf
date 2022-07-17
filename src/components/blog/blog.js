@@ -70,10 +70,14 @@ render()
                             
                                 <div class ='a' >Tytuł: {item.title}| Autor: {item.author} 
                                   <div class = 'content-diw'> {item.content.substring(0,100)}...</div>
-                                </div>                     
+                                  {item.event && <p>Wydarzenie</p>}
+                                  {!item.event && <p>Post</p>}
+                                </div>   
+                                                
                             </div>
                             
                         </div>
+                    
                         </Link>
                         </div>     
                         ))}

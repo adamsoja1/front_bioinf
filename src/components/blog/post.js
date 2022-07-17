@@ -5,6 +5,7 @@ import App4 from '../navbar/navBar'
 import './post.css'
 import Comment from '../comments/commentAdd'
 import Photos from  '../Gallery/photos'
+import Tag from './tags'
 function Post()
 {
     const {id} = useParams();
@@ -25,24 +26,30 @@ function Post()
 
  
 
-        const photos = post.photos ||{};
+        
 
     return(
-        <div>  
+        <div class = 'container'>  
             <App4/>
             
                 <div class = 'disp'>
-              
+                
+                    <Tag id ={id}/>
+                    
                     
                     <h3 class = 'display-4'> Tytuł: {post.title}  </h3> 
                         <p >{post.content}</p> 
                         
                       
+                        <Photos id = {id}/>
                  </div> 
+
             <div>
-                <Photos id = {id}/>
+                
             </div>
-            <div>
+
+
+            <div class = 'comm'>
                  
                      <Comment numer = {id}/>
 

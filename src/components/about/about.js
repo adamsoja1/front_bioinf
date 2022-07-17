@@ -2,11 +2,13 @@ import React from 'react';
 import {useState,useEffect} from 'react';
 import App4 from '../navbar/navBar'
 import MemberPhoto from './aboutphoto'
+
 export default function About()
 
 {
-    const apiUrl = 'http://127.0.0.1:8000'
+   
     const [users,setUsers] = useState([])
+
     useEffect(() => {
         fetch('http://127.0.0.1:8000/api/members/')
         .then(res => res.json())

@@ -9,7 +9,8 @@ import Post from './components/blog/post'
 import { BrowserRouter as Router, Route
 } from "react-router-dom";
 import CreateMember from './components/about/aboutAdd';
-
+import Event from './components/events/events';
+import FetchPhotos from './components/Gallery/gallery';
 ReactDOM.render((
   <Router>
     <Route exact path='/' component={Home} />
@@ -18,6 +19,8 @@ ReactDOM.render((
     <Route exact path ='/post/:id' component ={Post}/>
     <Route exact path = '/about' component = {About}/>
     <Route exact path = '/about/create' component = {CreateMember}/>
+    <Route exact path ='/events' component = {Event}/>
+    <Route exact path = '/gallery' component = {FetchPhotos}/>
   </Router>
   ),
   document.getElementById('root')

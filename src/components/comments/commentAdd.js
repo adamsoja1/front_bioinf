@@ -50,10 +50,10 @@ function Comment(params)
    
     
       return(
-          <div class = 'container'>
+          <div>
             <div>
                 <form> 
-                    <div>
+                    <div class = 'container'> 
                         <label> Nazwa uzytkowika</label>
                         <input 
                         type = 'text'
