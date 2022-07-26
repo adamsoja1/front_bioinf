@@ -11,6 +11,11 @@ import { BrowserRouter as Router, Route
 import CreateMember from './components/about/aboutAdd';
 import Event from './components/events/events';
 import FetchPhotos from './components/Gallery/gallery';
+import GetPostByTag from './components/blog/tag';
+import SearchQueryContent from './components/Search/Search';
+
+
+
 ReactDOM.render((
   <Router>
     <Route exact path='/' component={Home} />
@@ -21,6 +26,8 @@ ReactDOM.render((
     <Route exact path = '/about/create' component = {CreateMember}/>
     <Route exact path ='/events' component = {Event}/>
     <Route exact path = '/gallery' component = {FetchPhotos}/>
+    <Route exact path = '/:nazwa/posts' component = {GetPostByTag}/>
+    <Route exact path = '/search' component = {SearchQueryContent}/>
   </Router>
   ),
   document.getElementById('root')

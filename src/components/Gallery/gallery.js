@@ -4,3 +4,4 @@ export default function FetchPhotos(){
         <h2>galeria</h2>
     )
 }
+

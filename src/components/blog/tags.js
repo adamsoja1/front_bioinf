@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState,useEffect} from 'react';
 
-
+import { Link } from 'react-router-dom';
 
 export default function Tag(params){
 
@@ -22,7 +22,9 @@ export default function Tag(params){
         <div>
 
             {tags.map(tag=>(
+                <Link to ={`/${tag.tagi}/posts`}>
                 <h6>{tag.tagi}</h6>
+                </Link>
             ))}
 
         </div>

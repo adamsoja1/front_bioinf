@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState,useEffect} from 'react';
 import { useParams } from "react-router-dom";
-import App4 from '../navbar/navBar'
+import Navbar from '../navbar/navBar'
 import './post.css'
 import Comment from '../comments/commentAdd'
 import Photos from  '../Gallery/photos'
@@ -29,8 +29,8 @@ function Post()
         
 
     return(
-        <div class = 'container'>  
-            <App4/>
+        <div>  
+            <Navbar/>
             
                 <div class = 'disp'>
                 

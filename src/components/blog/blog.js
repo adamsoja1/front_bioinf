@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import App4 from '../navbar/navBar'
+import Navbar from '../navbar/navBar'
 import './wyglad.css'
 
 //Collecting data from API
@@ -93,7 +93,7 @@ render()
 
 function App2() {
     return(<div>
-        <App4/>
+        <Navbar/>
       <div class = 'container'>
 
         <Blog/>
