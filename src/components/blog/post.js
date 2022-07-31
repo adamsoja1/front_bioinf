@@ -1,16 +1,15 @@
 import React from 'react';
 import {useState,useEffect} from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import Navbar from '../navbar/navBar'
 import './post.css'
 import Comment from '../comments/commentAdd'
 import Photos from  '../Gallery/photos'
 import Tag from './tags'
-function Post()
+function Post(props)
 {
+    const {url} = useParams();
     const {id} = useParams();
-    
-
     const [post, setPost] = useState([]);
     
 
@@ -37,7 +36,7 @@ function Post()
                     <Tag id ={id}/>
                     
                     
-                    <h3 class = 'display-4'> Tytuł: {post.title}  </h3> 
+                    <h3 class = 'display-4'> Tytuł: {post.title} <h6> Dodano:    {post.get_time_display}</h6> </h3> 
                         <p >{post.content}</p> 
                         
                       

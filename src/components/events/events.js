@@ -29,7 +29,7 @@ export default function Events(){
                 
                 {items.map(item=>(                                               
                     <div class = 'col-6 .--4col-' key={item.id}>
-                     <Link to={`/post/${item.id}`}>
+                     <Link to={`/post/${item.get_absolute_url}/${item.id}`}>
                      <div class ='blog-diw'>
                      
                         

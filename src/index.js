@@ -21,7 +21,7 @@ ReactDOM.render((
     <Route exact path='/' component={Home} />
     <Route exact path='/blog' component ={Home}/>
     <Route exact path = '/dodaj' component = {Add}/>
-    <Route exact path ='/post/:id' component ={Post}/>
+    <Route exact path ='/post/:url/:id' component ={Post}/>
     <Route exact path = '/about' component = {About}/>
     <Route exact path = '/about/create' component = {CreateMember}/>
     <Route exact path ='/events' component = {Event}/>

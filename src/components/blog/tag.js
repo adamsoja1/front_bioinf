@@ -27,10 +27,8 @@ import Navbar from '../navbar/navBar'
                 
                 {post.map(item=>(                                               
                     <div class = 'col-6 .--4col-' key={item.id}>
-                     <Link to={`/post/${item.id}`}>
-                     <div class ='blog-diw'>
-                     
-                        
+                     <Link to={`/post/${item.get_absolute_url}/${item.id}`}>
+                     <div class ='blog-diw'>                                          
                         <div >
                         
                             <div class ='a' >Tytuł: {item.title}| Autor: {item.author} 

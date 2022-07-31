@@ -35,7 +35,6 @@ componentDidMount(){
 
     }    
 
-
 render()
 {
     var {isLoaded,items} = this.state;
@@ -62,7 +61,13 @@ render()
                     
                     {items.map(item=>(                                               
                         <div class = 'col-6 .--4col-' key={item.id}>
-                         <Link to={`/post/${item.id}`}>
+                         <Link to={{
+                             pathname:`/post/${item.get_absolute_url}/${item.id}`,
+                             search: ``,
+                             state:{stateParam:true},
+                             
+ 
+                    }}>    
                          <div class ='blog-diw'>
                          
                             
@@ -72,6 +77,10 @@ render()
                                   <div class = 'content-diw'> {item.content.substring(0,100)}...</div>
                                   {item.event && <p>Wydarzenie</p>}
                                   {!item.event && <p>Post</p>}
+                             
+                                 
+                                  <img src = {item.photos.length>0 ? item.photos[0].photos.thumbnail:''}></img>
+
                                 </div>   
                                                 
                             </div>

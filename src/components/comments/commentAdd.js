@@ -1,7 +1,7 @@
 import { useState,useEffect,useReducer } from "react";
 import React from 'react';
 import { useHistory } from "react-router-dom";
-
+import './comment.css'
 
 function Comment(params)
 {
@@ -85,7 +85,10 @@ function Comment(params)
                     {comment.map(coment=>
                     (
                             <div key = {coment.id}>
-                                <h4>{coment.User}</h4>
+                                
+                                <h4>Uzytkownik: {coment.User}</h4>
+                                <h7  > Dodano: {coment.get_time} </h7>
+                                <h2> </h2>
                                 <h6>{coment.content}</h6>
                                 <p></p>
                             </div>
