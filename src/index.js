@@ -13,7 +13,8 @@ import Event from './components/events/events';
 import FetchPhotos from './components/Gallery/gallery';
 import GetPostByTag from './components/blog/tag';
 import SearchQueryContent from './components/Search/Search';
-
+import Login from './components/login/login'
+import Logout from './components/login/logout';
 
 
 ReactDOM.render((
@@ -28,6 +29,7 @@ ReactDOM.render((
     <Route exact path = '/gallery' component = {FetchPhotos}/>
     <Route exact path = '/:nazwa/posts' component = {GetPostByTag}/>
     <Route exact path = '/search' component = {SearchQueryContent}/>
+    <Route exact path = '/login' component = {Login}/>
   </Router>
   ),
   document.getElementById('root')

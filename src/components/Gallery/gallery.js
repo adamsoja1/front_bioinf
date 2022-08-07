@@ -23,7 +23,7 @@ export default function FetchPhotos(){
     const [galery,setGalery] = useState([]);
     const apiUrl = 'http://127.0.0.1:8000'
     const [modal, setModal] = useState(false);
-    const [photo,setPhoto] = useState('')
+    const [photo,setPhoto] = useState('');
 
     const toggleModal = () => {
         setModal(!modal);
@@ -53,7 +53,7 @@ export default function FetchPhotos(){
                     <div key = {galer.id}>
                     <h2>{galer.OpisGalerii}</h2>
                     <h7>{galer.date}</h7>
-                    <div className = 'parent' onClick = {toggleModal}> 
+                    <div className = 'parent'> 
                     {galer.gallery_photos.map(photo=>(
                         <div className = 'gallery'>
                         <img src = {apiUrl + photo.photos.full_size} onClick = {()=> togglePhoto(photo.photos.full_size)}></img>
@@ -76,9 +76,9 @@ export default function FetchPhotos(){
                             <div className = 'modal-content' onClick = {toggleModal}>
 
                                 <img src = {apiUrl + photo}></img>
-                                <button className="close-modal" onClick={toggleModal}>
-              CLOSE
-            </button>
+                                <button  className="button-50" role = 'button' type='submit' onClick={toggleModal}>
+                                            X
+                            </button>
                                 </div>
                             
                             

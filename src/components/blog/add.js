@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from 'react';
 import { useHistory } from "react-router-dom";
 import App4 from '../navbar/navBar'
@@ -9,17 +9,25 @@ const Create = () => {
   const [author, setAuthor] = useState('');
   const[isPending,setIsPending] = useState(false);
   const history = useHistory();
-
+  const token = localStorage.getItem('token')
+ 
 
   
+  useEffect(()=>{
+    if(!localStorage.getItem('token')){
+      history.push('/login')
+    }
+  })
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const blog = { title, content, author };
     setIsPending(true)
-    fetch('http://127.0.0.1:8000/api/posts/', {
+    fetch('http://127.0.0.1:8000/post/add-new', {
       method: 'POST',
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" ,
+                  Authorization : `Token ${token}`},
       body: JSON.stringify(blog)
     }).then(() => {
 

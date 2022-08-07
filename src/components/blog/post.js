@@ -24,8 +24,8 @@ function Post(props)
      
 
  
-
         
+        console.log(post.content)
 
     return(
         <div>  
@@ -36,13 +36,16 @@ function Post(props)
                     <Tag id ={id}/>
                     
                     
-                    <h3 class = 'display-4'> Tytuł: {post.title} <h6> Dodano:    {post.get_time_display}</h6> </h3> 
-                        <p >{post.content}</p> 
-                        
-                      
+                    <h3 class = 'display-4'> Tytuł: {post.title} <h6> Dodano: {post.get_time_display}</h6> </h3> 
+
+                      <div>
+                          <pre>
+                          {post.content} 
+                          </pre>
+                          </div>          
+
                         <Photos id = {id}/>
                  </div> 
-
             <div>
                 
             </div>
@@ -51,10 +54,6 @@ function Post(props)
             <div class = 'comm'>
                  
                      <Comment numer = {id}/>
-
-                   
-                 
-
                 </div>
             </div>       
                          

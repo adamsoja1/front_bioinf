@@ -1,6 +1,6 @@
 
 import React,{Component} from 'react';
-
+import Logout from '../login/logout'
 function Navbar(){
 
  
@@ -34,6 +34,15 @@ function Navbar(){
         <a class="dropdown-item" href="https://www.polsl.pl/rau/">AEI</a>
       </div>
     </li>
+    {!localStorage.getItem('token')&&<li class="nav-item">
+          <a class="nav-link "href='/login'>Login</a>
+        </li>}
+    {localStorage.getItem('token')&&<li class="nav-item">
+          <a class="nav-link "href='/login' onClick={Logout}>Logout</a>
+        </li>}
+        {localStorage.getItem('token')&&<li class="nav-item">
+          <a class="nav-link "href='/dodaj' >Dodaj post</a>
+        </li>}
       </ul>
     </div>
       </div>

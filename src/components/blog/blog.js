@@ -2,13 +2,9 @@ import React,{Component} from 'react';
 import Navbar from '../navbar/navBar'
 import './wyglad.css'
 
-//Collecting data from API
 import { Link } from 'react-router-dom';
 
 class Blog extends Component{
-    
-
-    
     constructor(props){
         super(props);
         this.state = {

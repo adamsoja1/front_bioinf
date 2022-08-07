@@ -48,7 +48,7 @@ function Photos(params){
                             <div className = 'modal-content' onClick = {toggleModal}>
 
                                 <img src = {apiUrl + photo}></img>
-                                <button className="close-modal" onClick={toggleModal}>
+                                <button className="button-50" onClick={toggleModal}>
               X
             </button>
                                 </div>
