@@ -3,9 +3,12 @@ import './galer.css'
 import React from 'react';
 import FetchPhotos from './gallery'
 import './Modal.css'
+import { setImageFormatsSupported } from "openseadragon";
 function Photos(params){
     const apiUrl = 'http://127.0.0.1:8000'
     const [photos, setPhotos] = useState([])
+    const [isPending,setIsPending] = useState()
+    
     if(modal) {
         document.body.classList.add('active-modal')
       } else {
@@ -13,8 +16,8 @@ function Photos(params){
       }
 
     const [modal, setModal] = useState(false);
-    const [photo,setPhoto] = useState('')
-
+    const [photo,setPhoto] = useState()
+    const [foto,setFoto] = useState()
     const toggleModal = () => {
         setModal(!modal);
       };
@@ -22,10 +25,6 @@ function Photos(params){
     function togglePhoto(photo){
         setPhoto(photo);
         setModal(true)
-
-        console.log('cos')
-        console.log(modal)
-        console.log(photo)
     }
 
     useEffect(()=>{
@@ -33,8 +32,18 @@ function Photos(params){
         .then(result => result.json())
         .then((result) => setPhotos(result))
     },[])
+
+
+
+    
+
+
+
+        
+      
     
     return(
+        <div>
         <div className = 'parent'>
             {photos.map(photo =>(
                 <div class = 'gallery'>
@@ -57,6 +66,9 @@ function Photos(params){
                             
                             </div>}
 
+        </div>
+
+ 
         </div>
     )
 }

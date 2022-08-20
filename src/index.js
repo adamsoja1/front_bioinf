@@ -15,6 +15,8 @@ import GetPostByTag from './components/blog/tag';
 import SearchQueryContent from './components/Search/Search';
 import Login from './components/login/login'
 import Logout from './components/login/logout';
+import EditPost from './components/post-actions/postPUT';
+import PostRubbish from './components/post-actions/postsRUBBISH';
 
 
 ReactDOM.render((
@@ -30,6 +32,8 @@ ReactDOM.render((
     <Route exact path = '/:nazwa/posts' component = {GetPostByTag}/>
     <Route exact path = '/search' component = {SearchQueryContent}/>
     <Route exact path = '/login' component = {Login}/>
+    <Route exact path = '/edit/post/:id' component ={EditPost}/>
+    <Route exact path = '/post-rubbish' component ={PostRubbish}/>
   </Router>
   ),
   document.getElementById('root')

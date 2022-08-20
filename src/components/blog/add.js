@@ -7,28 +7,42 @@ const Create = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [author, setAuthor] = useState('');
+  const [event,setEvent] = useState(false)
+  const [photos,setPhotos] = useState()
   const[isPending,setIsPending] = useState(false);
   const history = useHistory();
-  const token = localStorage.getItem('token')
- 
 
-  
+  const token = localStorage.getItem('token')
+
+  const [tagi,setTagi] = useState([])
+
   useEffect(()=>{
     if(!localStorage.getItem('token')){
       history.push('/login')
     }
   })
 
+  
+  const handleSubmit = () => {
+  
+ ;
+    console.log(photos)
+    const uploadData = new FormData();
+    uploadData.append('title',title)
+    uploadData.append('content',content)
+    uploadData.append('author',author)
+    uploadData.append('event',event)
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const blog = { title, content, author };
+    for(let i=0;i<=photos.length;i++){
+      uploadData.append('photos',photos[i]);
+      
+  }
+    console.log(uploadData)
     setIsPending(true)
-    fetch('http://127.0.0.1:8000/post/add-new', {
-      method: 'POST',
-      headers: { "Content-Type": "application/json" ,
-                  Authorization : `Token ${token}`},
-      body: JSON.stringify(blog)
+    fetch('http://127.0.0.1:8000/post-add', {
+      method: 'POST',    
+      headers: { Authorization : `Token ${token}`},
+      body: uploadData
     }).then(() => {
 
       history.push('/blog');
@@ -36,12 +50,13 @@ const Create = () => {
     .catch((error) =>{
       setIsPending(false)
   })
-
-  }    
+    
+  } 
+    
   return (
     <div class="container" id='rozmiar'>
       <div class = 'mb-3' id='rozmiar'>
-      <form onSubmit={handleSubmit}>
+      <form>
         <div class = 'mb-3'>
         <label for= "exampleFormControlInput1" class="form-label">Tytuł posta:</label>
         <input
@@ -69,15 +84,32 @@ const Create = () => {
         <input 
         id='shadow-add' 
           type="text" 
-          class='form-control'
-         
+          class='form-control'         
           required 
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
         />
+
         </div>
+        
+        <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="flexCheckDefault" value={event} onChange = {(e) => setEvent(!event)}/>
+        <label class="form-check-label" for="flexCheckDefault">
+          Wydarzenie
+        </label>
+      </div>
+      <div className="App">
+
+        <br/>
+        <label>
+        
+          <input type="file" multiple onChange={(e) => setPhotos(e.target.files)}/>
+        </label>
+        <br/>
+        </div>
+      
         <center>
-        {!isPending && <button id='shadow-add'  type = 'submit' class = 'btn btn-primary'>Dodaj post</button>}
+        {!isPending && <button onClick={()=>handleSubmit()} id='shadow-add'  type = 'submit' class = 'btn btn-primary'>Dodaj post</button>}
         { isPending && <button disabled type = 'submit' class = 'btn btn-primary'>Dodawanie...</button>}
         </center>
       </form>

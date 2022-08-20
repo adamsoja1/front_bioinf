@@ -1,4 +1,6 @@
 .blog-diw{
+    position: relative;
+    display: table;
     background-color:#F4F6F6;
     height: 200px;
     width: 500px;

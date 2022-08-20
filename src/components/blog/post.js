@@ -6,11 +6,13 @@ import './post.css'
 import Comment from '../comments/commentAdd'
 import Photos from  '../Gallery/photos'
 import Tag from './tags'
+import ImageUpload from './add-photo'
+import { Link } from 'react-router-dom';
 function Post(props)
 {
-    const {url} = useParams();
+    
     const {id} = useParams();
-    const [post, setPost] = useState([]);
+    const [post, setPost] = useState('');
     
 
 
@@ -25,7 +27,7 @@ function Post(props)
 
  
         
-        console.log(post.content)
+
 
     return(
         <div>  
@@ -34,8 +36,9 @@ function Post(props)
                 <div class = 'disp'>
                 
                     <Tag id ={id}/>
-                    
-                    
+                    {localStorage.getItem('token')&&
+                        <h4><Link to={`/edit/post/${post.id}`}>Edytuj</Link></h4>
+    }
                     <h3 class = 'display-4'> Tytuł: {post.title} <h6> Dodano: {post.get_time_display}</h6> </h3> 
 
                       <div>
@@ -45,6 +48,8 @@ function Post(props)
                           </div>          
 
                         <Photos id = {id}/>
+                        {localStorage.getItem('token')&&
+                        <ImageUpload id={id}/>}
                  </div> 
             <div>
                 

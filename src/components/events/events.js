@@ -8,14 +8,13 @@ export default function Events(){
 
     const [items,setItems] = useState([]);
 
-    const state = {
-        credentials: {username: 'adam', password: 'adam'}
-    }
+
     useEffect(()=>{
         fetch('http://127.0.0.1:8000/events')
 
         .then(result=>result.json())
         .then((result)=>setItems(result))
+      
 
 
     },[]);

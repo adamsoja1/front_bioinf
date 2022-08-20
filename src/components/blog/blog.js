@@ -1,58 +1,62 @@
-import React,{Component} from 'react';
+import React from 'react';
 import Navbar from '../navbar/navBar'
 import './wyglad.css'
+import {useState,useEffect} from 'react';
 
 import { Link } from 'react-router-dom';
+const url = 'http://127.0.0.1:8000'
 
-class Blog extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            items:[],
-            isLoaded:false,
-     
-       }
-    } 
-componentDidMount(){
-    fetch('http://127.0.0.1:8000/api/posts/')
-    .then(res=>res.json())
-    .then(json=>{
-        this.setState({
-            items:json,
-            isLoaded:true,
-            })
+
+
+
+
+
+
+function Blog(){
+    const [items,setItems] = useState([])
+    const [isLoaded,setIsLoaded] = useState(false)
+
+    useEffect(()=>{
+        fetch('http://127.0.0.1:8000/view-posts')
+        .then(res=>res.json())
+        .then((res)=> setItems(res))
+        .then(setIsLoaded(true))
+        .catch((error) =>{
+            setIsLoaded(false)
+        })
+    },[])
     
-        })
-    .catch((error) =>{
-        this.setState({
-        isLoaded:false,
-        })
-    })
+ const DeletePost = (id)=>{
+            fetch(`http://127.0.0.1:8000/post-edit/${id}`,
+                {
+                    method: 'DELETE',
+                    headers: { "Content-Type": "application/json" ,
+                                Authorization : `Token ${localStorage.getItem('token')}`},
+            })
+            .then(res=>res.json())
+            .then((res)=> setItems(res))
+ 
+        }
+    
 
-    }    
 
-render()
-{
-    var {isLoaded,items} = this.state;
-
-    if(!isLoaded){
-        return (<div class = 'container'>
-            
-            <div>
-            <center> 
-                <h2>Ładuję ...</h2>
-            </center>
-      </div>
-      <center>
-        <div class="spinner-border" role="status"></div>
-       </center>     
-      </div>
-        )
-    }
-    else{
         return(
             <div class = 'container'>
-                
+            {!isLoaded &&
+                <div class = 'container'>
+                           
+                           <div>
+                           <center> 
+                               <h2>Ładuję ...</h2>
+                           </center>
+                     </div>
+                     <center>
+                       <div class="spinner-border" role="status"></div>
+                      </center>     
+                     </div>
+                   }
+            
+                {isLoaded&&
                 <div class ='row align-items-center'>
                     
                     {items.map(item=>(                                               
@@ -75,25 +79,30 @@ render()
                                   {!item.event && <p>Post</p>}
                              
                                  
-                                  <img src = {item.photos.length>0 ? item.photos[0].photos.thumbnail:''}></img>
+                                  <img src = {item.photos.length>0 ? url + item.photos[0].photos.thumbnail:''}></img>
 
                                 </div>   
-                                                
+                                 
                             </div>
                             
                         </div>
                     
                         </Link>
-                        </div>     
-                        ))}
-                        
-                    </div>
+                        { localStorage.getItem('token')&&
+                            <h4><Link to={`/edit/post/${item.id}`}>Edytuj</Link></h4>  }
 
+                        { localStorage.getItem('token')&&
+                            <button onClick ={()=>DeletePost(item.id)}>Usun</button> }
+                        
+                        </div>     
+                            ))}
+                        
+                    </div>}
                 </div>
+
             )
         }
-    }
-}
+    
 
 
 function App2() {

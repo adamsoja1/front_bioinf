@@ -8,11 +8,11 @@ import '../blog/wyglad.css'
 
 export default function SearchQueryContent(){
     const [post,setPost] = useState([]);
-    const [query,setQuery] = useState(' ');
+    const [query,setQuery] = useState('');
 
     
     useEffect(()=>{
-        fetch('http://127.0.0.1:8000/api/posts/')
+        fetch('http://127.0.0.1:8000/view-posts')
         .then(result => result.json())
         .then((result) => setPost(result))
     },[])
