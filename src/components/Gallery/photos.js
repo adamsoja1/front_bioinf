@@ -3,7 +3,7 @@ import './galer.css'
 import React from 'react';
 import FetchPhotos from './gallery'
 import './Modal.css'
-import { setImageFormatsSupported } from "openseadragon";
+
 function Photos(params){
     const apiUrl = 'http://127.0.0.1:8000'
     const [photos, setPhotos] = useState([])
@@ -35,9 +35,37 @@ function Photos(params){
 
 
 
+
+    const [images,setImages] = useState()
+    const handleSubmit = () => {
+        const uploadData = new FormData();
+        if (images != undefined){
+        for(var i=0;i<=images.length;i++){
+            console.log(images[i])
+            uploadData.append('photos',images[i]);
+        }}
+        setIsPending(true)
+        fetch(`http://127.0.0.1:8000/photo-add-post/${params.id}`, {
+          method: 'POST',
+          headers: { Authorization : `Token ${localStorage.getItem('token')}`},
+          body: uploadData
+        })
+        .then(res=>res.json())
+        .then((res)=>setPhotos(res))
+        
+      } 
     
 
+      const deletePhoto = (photo_id) => {
 
+        fetch(`http://127.0.0.1:8000/photo-delete/${photo_id}/post/${params.id}`, {
+          method: 'DELETE',
+          headers: { Authorization : `Token ${localStorage.getItem('token')}`},
+        })
+        .then(res=>res.json())
+        .then((res)=>setPhotos(res))
+        
+      } 
 
         
       
@@ -47,7 +75,12 @@ function Photos(params){
         <div className = 'parent'>
             {photos.map(photo =>(
                 <div class = 'gallery'>
+
                       <img src = {apiUrl + photo.photos.full_size} onClick = {()=> togglePhoto(photo.photos.full_size)}></img>
+                      {localStorage.getItem('token')&&
+                        <div>
+                      <button onClick = {()=>deletePhoto(photo.id)}>Usun</button>
+                      </div>}
                 </div>
 
 
@@ -67,7 +100,16 @@ function Photos(params){
                             </div>}
 
         </div>
-
+        {localStorage.getItem('token')&&
+           <div>           
+        <br/>
+          <label>
+           
+            <input type="file" multiple onChange={(evt) => setImages(evt.target.files)}/>
+          </label>
+          <br/>
+          <button onClick={() => handleSubmit()}>Dodaj</button>
+          </div>}
  
         </div>
     )

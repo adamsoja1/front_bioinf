@@ -48,8 +48,7 @@ function Post(props)
                           </div>          
 
                         <Photos id = {id}/>
-                        {localStorage.getItem('token')&&
-                        <ImageUpload id={id}/>}
+
                  </div> 
             <div>
                 

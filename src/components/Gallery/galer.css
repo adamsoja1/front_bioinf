@@ -1,6 +1,6 @@
 .parent{
   display: table;
-  position: relative;
+  position: flex;
   left: 100px;
 }
 

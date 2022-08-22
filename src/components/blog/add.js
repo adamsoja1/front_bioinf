@@ -25,18 +25,18 @@ const Create = () => {
   
   const handleSubmit = () => {
   
- ;
+ 
     console.log(photos)
     const uploadData = new FormData();
     uploadData.append('title',title)
     uploadData.append('content',content)
     uploadData.append('author',author)
     uploadData.append('event',event)
+    if(photos != undefined){
+      for(let i=0;i<=photos.length;i++){
+        uploadData.append('photos',photos[i]);
+      }}
 
-    for(let i=0;i<=photos.length;i++){
-      uploadData.append('photos',photos[i]);
-      
-  }
     console.log(uploadData)
     setIsPending(true)
     fetch('http://127.0.0.1:8000/post-add', {
@@ -56,7 +56,7 @@ const Create = () => {
   return (
     <div class="container" id='rozmiar'>
       <div class = 'mb-3' id='rozmiar'>
-      <form>
+   
         <div class = 'mb-3'>
         <label for= "exampleFormControlInput1" class="form-label">Tytuł posta:</label>
         <input
@@ -109,10 +109,10 @@ const Create = () => {
         </div>
       
         <center>
-        {!isPending && <button onClick={()=>handleSubmit()} id='shadow-add'  type = 'submit' class = 'btn btn-primary'>Dodaj post</button>}
-        { isPending && <button disabled type = 'submit' class = 'btn btn-primary'>Dodawanie...</button>}
+        {!isPending && <button onClick={()=>handleSubmit()} id='shadow-add' class = 'btn btn-primary'>Dodaj post</button>}
+        { isPending && <button disabled  class = 'btn btn-primary'>Dodawanie...</button>}
         </center>
-      </form>
+      
       </div>
     </div>
   );

@@ -1,14 +1,16 @@
 import React,{Component,useState} from 'react';
-import App4 from '../navbar/navBar'
+import Navbar from '../navbar/navBar'
 import { useHistory } from "react-router-dom";
-
+ 
 
 function CreateMember(){
+
 
     const [email, setEmail] = useState('');
     const [about, setAbout] = useState('');
     const [position, setPosition] = useState('');
     const [user, setUser] = useState('');
+    const [photo,setPhoto] = useState()
     const[isPending,setIsPending] = useState(false);
     const history = useHistory();
   
@@ -17,14 +19,18 @@ function CreateMember(){
   
     const handleSubmit = (e) => {
       e.preventDefault();
-      const member = { user, position, about, email };
+      const uploadData = new FormData();
+      uploadData.append('user',user)
+      uploadData.append('position',position)
+      uploadData.append('email',email)
+      uploadData.append('about',about)
+      uploadData.append('member_photo',photo)
       setIsPending(true)
-      fetch('http://127.0.0.1:8000/api/members/', {
+      fetch('http://127.0.0.1:8000/members-add', {
         method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(member)
+        headers: { Authorization : `Token ${localStorage.getItem('token')}`},
+        body: uploadData
       }).then(() => {
-  
         history.push('/About');
       })
       .catch((error) =>{
@@ -33,6 +39,8 @@ function CreateMember(){
   
     }    
     return (
+      <div>
+        <Navbar/>
       <div class="container" id='rozmiar'>
         <div class = 'mb-3' id='rozmiar'>
         <form onSubmit={handleSubmit}>
@@ -81,12 +89,14 @@ function CreateMember(){
             onChange={(e) => setEmail(e.target.value)}
           ></input>
           </div>
+          <input type="file" multiple onChange={(e) => setPhoto(e.target.files[0])}/>
           <center>
           {!isPending && <button id='shadow-add'  type = 'submit' class = 'btn btn-primary'>Dodaj osobę</button>}
           { isPending && <button disabled type = 'submit' class = 'btn btn-primary'>Dodawanie...</button>}
           </center>
         </form>
         </div>
+      </div>
       </div>
     );
   }
