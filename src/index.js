@@ -17,7 +17,8 @@ import Login from './components/login/login'
 import Logout from './components/login/logout';
 import EditPost from './components/post-actions/postPUT';
 import PostRubbish from './components/post-actions/postsRUBBISH';
-
+import Allcomments from './components/comments/comments-all'
+import registeredMembers from './components/about/members';
 
 ReactDOM.render((
   <Router>
@@ -34,6 +35,8 @@ ReactDOM.render((
     <Route exact path = '/login' component = {Login}/>
     <Route exact path = '/edit/post/:id' component ={EditPost}/>
     <Route exact path = '/post-rubbish' component ={PostRubbish}/>
+    <Route exact path = '/comments-all' component = {Allcomments}/>
+    <Route exact path ='/members' component ={registeredMembers}/>
   </Router>
   ),
   document.getElementById('root')

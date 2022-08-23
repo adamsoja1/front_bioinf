@@ -20,8 +20,8 @@ export default function EditPost(params){
     const history = useHistory();
     const [redirect,setRedirect] = useState(true)
     const [event,setEvent] = useState()
- 
     const [type,setType] = useState()
+
 
 
 

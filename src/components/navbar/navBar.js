@@ -49,6 +49,12 @@ function Navbar(){
         {localStorage.getItem('token')&&<li class="nav-item">
           <a class="nav-link "href='/about/create' >Dodaj czlonka</a>
         </li>}
+        {localStorage.getItem('token')&&<li class="nav-item">
+          <a class="nav-link "href='/comments-all' >Usun komentarze</a>
+        </li>}
+        {localStorage.getItem('token')&&<li class="nav-item">
+          <a class="nav-link "href='/members' >Czlonkowie</a>
+        </li>}
       </ul>
     </div>
       </div>

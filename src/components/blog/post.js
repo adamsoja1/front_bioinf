@@ -45,7 +45,8 @@ function Post(props)
                           <pre>
                           {post.content} 
                           </pre>
-                          </div>          
+                          </div>   
+                          <h4>Wyswietlenia: {post.views} </h4>       
 
                         <Photos id = {id}/>
 

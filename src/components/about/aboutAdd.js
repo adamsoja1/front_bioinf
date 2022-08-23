@@ -1,4 +1,4 @@
-import React,{Component,useState} from 'react';
+import React,{Component,useState,useEffect} from 'react';
 import Navbar from '../navbar/navBar'
 import { useHistory } from "react-router-dom";
  
@@ -14,7 +14,11 @@ function CreateMember(){
     const[isPending,setIsPending] = useState(false);
     const history = useHistory();
   
-  
+    useEffect(()=>{
+      if(!localStorage.getItem('token')){
+        history.push('/login')
+      }
+    })
     
   
     const handleSubmit = (e) => {
@@ -89,7 +93,7 @@ function CreateMember(){
             onChange={(e) => setEmail(e.target.value)}
           ></input>
           </div>
-          <input type="file" multiple onChange={(e) => setPhoto(e.target.files[0])}/>
+          <input type="file"  onChange={(e) => setPhoto(e.target.files[0])}/>
           <center>
           {!isPending && <button id='shadow-add'  type = 'submit' class = 'btn btn-primary'>Dodaj osobę</button>}
           { isPending && <button disabled type = 'submit' class = 'btn btn-primary'>Dodawanie...</button>}
