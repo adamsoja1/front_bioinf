@@ -52,7 +52,7 @@ function Comment(params)
       return(
           <div>
             <div>
-                <form> 
+                <form > 
                     <div class = 'container'> 
                         <label> Nazwa uzytkowika</label>
                         <input 
@@ -66,10 +66,10 @@ function Comment(params)
                         <label> Treść </label>
                         <input
                         type = 'tekst'
-                        required
+                        
                         value = {content}
                         onChange = {(e) => setContent(e.target.value)}
-                        />
+                        required/>
                     </div>
                     <center>
                     {!isPending && <button onClick= {handleSubmit}  id='shadow-add'  type ='submit' class = 'btn btn-primary'>Dodaj komentarz</button>}

@@ -19,6 +19,7 @@ import EditPost from './components/post-actions/postPUT';
 import PostRubbish from './components/post-actions/postsRUBBISH';
 import Allcomments from './components/comments/comments-all'
 import registeredMembers from './components/about/members';
+import CreateGallery from './components/Gallery/gallery-add'
 
 ReactDOM.render((
   <Router>
@@ -37,6 +38,7 @@ ReactDOM.render((
     <Route exact path = '/post-rubbish' component ={PostRubbish}/>
     <Route exact path = '/comments-all' component = {Allcomments}/>
     <Route exact path ='/members' component ={registeredMembers}/>
+    <Route exact path ='/gallery-add' component = {CreateGallery}/>
   </Router>
   ),
   document.getElementById('root')

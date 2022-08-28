@@ -24,6 +24,7 @@ export default function FetchPhotos(){
     const apiUrl = 'http://127.0.0.1:8000'
     const [modal, setModal] = useState(false);
     const [photo,setPhoto] = useState('');
+    const [photos,setPhotos] = useState()
 
     const toggleModal = () => {
         setModal(!modal);
@@ -43,6 +44,50 @@ export default function FetchPhotos(){
         .then((result) => setGalery(result))
     },[])
 
+
+    const deletePhoto = (id) =>{
+        fetch(`http://127.0.0.1:8000/delete-gallery-photo/${id}`,
+        {
+            method: 'DELETE',
+            headers: { "Content-Type": "application/json" ,
+                        Authorization : `Token ${localStorage.getItem('token')}`},
+    
+            })
+            .then(res=>res.json())
+            .then((res)=> setGalery(res))
+    
+        }
+    
+    const deleteGallery = (id) =>{
+        fetch(`http://127.0.0.1:8000/gallery-delete/${id}`,
+        {
+            method: 'DELETE',
+            headers: { "Content-Type": "application/json" ,
+                        Authorization : `Token ${localStorage.getItem('token')}`},
+    
+            })
+            .then(res=>res.json())
+            .then((res)=> setGalery(res))
+    
+        }
+
+    const addPhotos = (id) =>{
+        const uploadData = new FormData();
+        if(photos != undefined){
+            for(let i=0;i<=photos.length;i++){
+              uploadData.append('photos',photos[i]);
+            }}
+        fetch(`http://127.0.0.1:8000/gallery-delete/${id}`, {
+        method: 'POST',
+        headers: { Authorization : `Token ${localStorage.getItem('token')}`},
+        body: uploadData
+    })
+            .then(res=>res.json())
+            .then((res)=> setGalery(res))
+
+    }
+    
+
     return(
        <div>
            <Navbar/>
@@ -50,14 +95,25 @@ export default function FetchPhotos(){
             <div>
                 
                 {galery.map(galer=>(
-                    <div key = {galer.id}>
+                    <div>
+                        <br/>
+                    {localStorage.getItem('token')&&
+                    <div>
+                        <input type="file" multiple onChange={(e) => setPhotos(e.target.files)}/>
+                    <button onClick = {()=>addPhotos(galer.id)}>Dodaj zdjecia</button>
+                    </div>}   
                     <h2>{galer.OpisGalerii}</h2>
                     <h7>{galer.date}</h7>
+                    <br/>
+               
                     <div className = 'parent'> 
                     {galer.gallery_photos.map(photo=>(
+                        
                         <div className = 'gallery'>
                         <img src = {apiUrl + photo.photos.full_size} onClick = {()=> togglePhoto(photo.photos.full_size)}></img>
-                        
+                        {localStorage.getItem('token')&&
+                        <button onClick = {()=>deletePhoto(photo.id)}>Usun</button>}
+                        <br/>
                         
                                 </div>
 
@@ -66,6 +122,12 @@ export default function FetchPhotos(){
 
 
                     </div>
+                    {localStorage.getItem('token')&&
+                    <div>
+                        <br/>
+                        <br/>
+                    <button onClick = {()=>deleteGallery(galer.id)}>Usuń galerie</button>
+                    </div>}
                     </div>
                     
                 ))}

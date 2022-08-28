@@ -55,6 +55,7 @@ const Create = () => {
     
   return (
     <div class="container" id='rozmiar'>
+      
       <div class = 'mb-3' id='rozmiar'>
    
         <div class = 'mb-3'>
@@ -93,7 +94,8 @@ const Create = () => {
         </div>
         
         <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="flexCheckDefault" value={event} onChange = {(e) => setEvent(!event)}/>
+        <input class="form-check-input" type="checkbox" id="flexCheckDefault" value={event} onChange = {(e) => setEvent(!event)}
+        required/>
         <label class="form-check-label" for="flexCheckDefault">
           Wydarzenie
         </label>
@@ -109,7 +111,7 @@ const Create = () => {
         </div>
       
         <center>
-        {!isPending && <button onClick={()=>handleSubmit()} id='shadow-add' class = 'btn btn-primary'>Dodaj post</button>}
+        {!isPending && <button type='submit' onClick={()=>handleSubmit()} id='shadow-add' class = 'btn btn-primary'>Dodaj post</button>}
         { isPending && <button disabled  class = 'btn btn-primary'>Dodawanie...</button>}
         </center>
       
