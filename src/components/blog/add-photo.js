@@ -7,20 +7,13 @@ export default function ImageUpload(params){
     const[photo,setPhoto] = useState([])
     const [photos,setPhotos] = useState()
     const [isPending,setIsPending] = useState()
-    const history = useHistory()
-    const post = params.id
+
     const handleSubmit = () => {
         console.log(photos)
         const uploadData = new FormData();
-        
         for(let i=0;i<=photos.length;i++){
             uploadData.append('photos',photos[i]);
         }
-       
-
-
-
-
         setIsPending(true)
         fetch(`http://127.0.0.1:8000/photo-add-post/${params.id}`, {
           method: 'POST',
@@ -28,12 +21,10 @@ export default function ImageUpload(params){
           body: uploadData
         })
         .then(res=>res.json())
-        .then((res)=>setPhoto(res))
-        
-
-        
+        .then((res)=>setPhoto(res))      
       } 
     
+
 
     return (
         <div className="App">

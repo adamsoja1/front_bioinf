@@ -9,12 +9,13 @@ const Create = () => {
   const [author, setAuthor] = useState('');
   const [event,setEvent] = useState(false)
   const [photos,setPhotos] = useState()
+  const [tags,setTags] = useState([])
+  const [put_tag,setPut_tag] = useState([])
   const[isPending,setIsPending] = useState(false);
   const history = useHistory();
-
   const token = localStorage.getItem('token')
 
-  const [tagi,setTagi] = useState([])
+  const [newtag,setNewtag] = useState()
 
   useEffect(()=>{
     if(!localStorage.getItem('token')){
@@ -22,16 +23,47 @@ const Create = () => {
     }
   })
 
+  useEffect(()=>{
+    fetch('http://127.0.0.1:8000/tags-operations', {
+      method: 'GET',    
+      headers: { Authorization : `Token ${token}`}
+    })
+    .then(res=>res.json())
+    .then((res)=>setTags(res))
+  },[])
   
+
+  const addNewtags = () =>{
+    const uploadData = new FormData();
+  
+    uploadData.append('tagi',newtag)
+  
+
+
+    fetch('http://127.0.0.1:8000/tags-operations', {
+      method: 'POST',    
+      headers: { Authorization : `Token ${token}`},
+      body: uploadData
+    })
+    .then(res=>res.json())
+    .then((res)=>setTags(res))
+
+  }
+
+
+
+
   const handleSubmit = () => {
-  
- 
     console.log(photos)
     const uploadData = new FormData();
     uploadData.append('title',title)
     uploadData.append('content',content)
     uploadData.append('author',author)
     uploadData.append('event',event)
+
+    
+    uploadData.append('tag',put_tag)
+  
     if(photos != undefined){
       for(let i=0;i<=photos.length;i++){
         uploadData.append('photos',photos[i]);
@@ -52,7 +84,18 @@ const Create = () => {
   })
     
   } 
-    
+
+  const appendToUpload = (tag) =>{
+    if (!put_tag.includes(tag)){
+      setPut_tag(tags=>[...tags,tag])
+    }
+  }
+  const deleteFromUpload = (tag) =>{
+    var arr = put_tag
+    arr.pop(tag)
+    setPut_tag(tags=>[arr])
+  }
+  console.log(put_tag)
   return (
     <div class="container" id='rozmiar'>
       
@@ -115,6 +158,33 @@ const Create = () => {
         { isPending && <button disabled  class = 'btn btn-primary'>Dodawanie...</button>}
         </center>
       
+            <div>
+
+            <div>
+              <input
+              value={newtag}
+              onChange = {(e)=>setNewtag(e.target.value)}
+              />
+              <button onClick={()=>addNewtags()}>Dodaj</button>
+            </div>
+            
+          
+
+           <h3>Dostepne tagi:</h3>
+              {tags.map(tag=>(
+                <div>
+                 <h7 onClick = {()=>appendToUpload(tag.tagi)}>{tag.tagi}</h7>
+                 </div>
+                  
+              ))}
+            <h3>Dodane tagi:</h3>
+            {put_tag.map(tags=>(
+                <div>
+                 <h7 onClick = {()=>deleteFromUpload(tags)}>{tags}</h7>
+                 </div>
+                  
+              ))}
+            </div>
       </div>
     </div>
   );

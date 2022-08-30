@@ -115,7 +115,7 @@ export default function FetchPhotos(){
                         <button onClick = {()=>deletePhoto(photo.id)}>Usun</button>}
                         <br/>
                         
-                                </div>
+                        </div>
 
 
                     ))}
