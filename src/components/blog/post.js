@@ -34,7 +34,6 @@ function Post(props)
             <Navbar/>
             
                 <div class = 'disp'>
-                
                     <Tag id ={id}/>
                     {localStorage.getItem('token')&&
                         <h4><Link to={`/edit/post/${post.id}`}>Edytuj</Link></h4>
@@ -42,9 +41,9 @@ function Post(props)
                     <h3 class = 'display-4'> Tytuł: {post.title} <h6> Dodano: {post.get_time_display}</h6> </h3> 
 
                       <div>
-                          <pre>
+                          <p>
                           {post.content} 
-                          </pre>
+                          </p>
                           </div>   
                           <h4>Wyswietlenia: {post.views} </h4>       
 

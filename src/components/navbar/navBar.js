@@ -1,17 +1,26 @@
 
 import React,{Component} from 'react';
 import Logout from '../login/logout'
+import logo from './logo.png'
+import '../blog/wyglad.css'
+import ParticlesBackground from '../particles/particles'
 function Navbar(){
 
  
     return(
-   
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+   <div>
+    <nav class="navbar navbar-expand-lg navbar-dark" style = {{backgroundColor : "#454f54",
+                                                               position:'fixed!important'  }}>
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">Strona glowna</a>
-            
+            <a class="navbar-brand" href="/" >
+            <img src ={logo} style={{height:"70px",
+                                      width:"240px"}}></img>
+            </a>
             <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
+      <li class="nav-item">
+          <a class="nav-link" href="/">Aktualności</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="/About">O nas</a>
         </li>
@@ -63,7 +72,7 @@ function Navbar(){
       </div>
         
   </nav>
-
+</div>
     )
 }
 

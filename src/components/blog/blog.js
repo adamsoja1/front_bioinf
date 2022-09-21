@@ -2,8 +2,10 @@ import React from 'react';
 import Navbar from '../navbar/navBar'
 import './wyglad.css'
 import {useState,useEffect} from 'react';
-
+import './wyglad-boxow.css'
 import { Link } from 'react-router-dom';
+import Particles from 'react-tsparticles';
+import ParticlesBackground from '../particles/particles';
 const url = 'http://127.0.0.1:8000'
 
 
@@ -16,6 +18,8 @@ function Blog(){
     const [items,setItems] = useState([])
     const [isLoaded,setIsLoaded] = useState(false)
 
+    const [lastPosts,setLastPosts] = useState([])
+    const [mostViewedPosts,setMostViewedPosts] = useState([]);
     useEffect(()=>{
         fetch('http://127.0.0.1:8000/view-posts')
         .then(res=>res.json())
@@ -26,6 +30,29 @@ function Blog(){
         })
     },[])
     
+    useEffect(()=>{
+        fetch('http://127.0.0.1:8000/latest-posts')
+        .then(res=>res.json())
+        .then((res)=> setLastPosts(res))
+        .catch((error) =>{
+            setIsLoaded(false)
+        })
+    },[])
+
+
+
+
+    useEffect(()=>{
+        fetch('http://127.0.0.1:8000/most-viewed')
+        .then(res=>res.json())
+        .then((res)=> setMostViewedPosts(res))
+        .catch((error) =>{
+            setIsLoaded(false)
+        })
+    },[])
+    
+
+
  const DeletePost = (id)=>{
             fetch(`http://127.0.0.1:8000/post-edit/${id}`,
                 {
@@ -41,9 +68,9 @@ function Blog(){
 
 
         return(
-            <div class = 'container'>
+            <div>
             {!isLoaded &&
-                <div class = 'container'>
+                <div>
                            
                            <div>
                            <center> 
@@ -55,49 +82,140 @@ function Blog(){
                       </center>     
                      </div>
                    }
-            
-                {isLoaded&&
-                <div class ='row align-items-center'>
-                    
-                    {items.map(item=>(                                               
-                        <div class = 'col-6 .--4col-' key={item.id}>
-                         <Link to={{
-                             pathname:`/post/${item.get_absolute_url}/${item.id}`,
-                             search: ``,
-                             state:{stateParam:true},
-                             
- 
-                    }}>    
-                         <div class ='blog-diw'>
-                         
-                            
-                            <div >
-                            
-                                <div class ='a' >Tytuł: {item.title}| Autor: {item.author} 
-                                  <div class = 'content-diw'> {item.content.substring(0,100)}...</div>
-                                  {item.event && <p>Wydarzenie</p>}
-                                  {!item.event && <p>Post</p>}
-                             
-                                 
-                                  <img src = {item.photos.length>0 ? url + item.photos[0].photos.thumbnail:''}></img>
 
+            {isLoaded &&
+            <div>
+                <div className = 'right'>
+
+
+                    <div className = 'obramowanie-latest'>
+                        <div> 
+                        <h5>Ostatnio dodane:</h5>
+                            {lastPosts.map(post=>(
+                                <div className='linijka-post-obramowanie'>
+                                    <div>
+                                    <Link to={{
+                                            pathname:`/post/${post.get_absolute_url}/${post.id}`,
+                                            search: ``,
+                                            state:{stateParam:true},
+                                            
+                
+                                    }}>  
+                                        <p>
+                       
+                                            <b>{post.title}</b> &nbsp; &nbsp; &nbsp;    Data:{post.get_time_display} 
+                                            
+                                        </p>
+                                        </Link>
+                                    </div>
+                                </div>
+
+                            ))}
+                        </div>
+                    </div> 
+
+
+
+
+                    <div className = 'obramowanie-latest'>
+                        <div> 
+                        <h5>Najchętniej oglądane:</h5>
+                            {mostViewedPosts.map(post=>(
+                                <div className='linijka-post-obramowanie'>
+                                    <div>
+                                    <Link to={{
+                                            pathname:`/post/${post.get_absolute_url}/${post.id}`,
+                                            search: ``,
+                                            state:{stateParam:true},
+                                            
+                
+                                    }}>  
+                                        <p>
+                       
+                                        <b>{post.title}</b> &nbsp; &nbsp; &nbsp; Wyświetlenia: {post.views}
+                                            
+                                        </p>
+                                        </Link>
+                                    </div>
+                                </div>
+
+                            ))}
+                        </div>
+                    </div> 
+
+
+
+
+
+
+
+
+
+                </div>                
+                
+
+                
+                
+                <div className='left'>
+                    <div className='tekst'>
+                <h3>Nowości</h3>
+                    </div>
+                <div>
+
+                    {items.map(item=>(                                               
+
+                        <div>
+                         
+
+                            
+                            <div  class ='blog-diw2'>
+                        
+                            
+                                <div> <h1> {item.title} </h1>
+                                  <div class = 'content-diw2'> {item.content.substring(0,100)}...       <Link to={{
+                                        pathname:`/post/${item.get_absolute_url}/${item.id}`,
+                                        search: ``,
+                                        state:{stateParam:true},
+                                }}>       
+                                    <a>Więcej...</a>
+                                    
+                                    </Link> 
+                                  </div>
+
+                           
+
+                                 {item.photos.length>0 &&
+                                  <img src = {url + item.photos[0].photos.full_size}></img>
+                                }
+
+ 
+                                  
+
+
+                                    
                                 </div>   
-                                 
+                                
                             </div>
                             
-                        </div>
                     
-                        </Link>
+                        
+                        <div className='przyciski'>
+
                         { localStorage.getItem('token')&&
                             <h4><Link to={`/edit/post/${item.id}`}>Edytuj</Link></h4>  }
 
                         { localStorage.getItem('token')&&
                             <button onClick ={()=>DeletePost(item.id)}>Usun</button> }
-                        
-                        </div>     
+                        </div>
+                       
+                           </div>
                             ))}
+                        </div>
                         
-                    </div>}
+                    
+                    </div>
+                    </div>
+                    }
                 </div>
 
             )
@@ -107,12 +225,14 @@ function Blog(){
 
 function App2() {
     return(<div>
+        
+        <ParticlesBackground/>
+        <div>
         <Navbar/>
-      <div class = 'container'>
-
         <Blog/>
+        </div>
       </div>
-      </div>
+
     )
   }
   

@@ -1,7 +1,8 @@
 import React from 'react';
 import {useState,useEffect} from 'react';
-import App4 from '../navbar/navBar'
+import Navbar from '../navbar/navBar'
 import MemberPhoto from './aboutphoto'
+import ParticlesBackgroundAbout from '../particles/particles2';
 
 export default function About()
 
@@ -28,7 +29,8 @@ export default function About()
 
     return (
         <div>
-            <App4/>
+            <ParticlesBackgroundAbout/>
+            <Navbar/>
             <div>
                 <h2>To my:</h2>
                 <div>
@@ -50,7 +52,7 @@ export default function About()
             </div>
         </div>
     )
-                }
+}
 
 
 

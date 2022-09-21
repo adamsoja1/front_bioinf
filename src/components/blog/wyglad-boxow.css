@@ -1,0 +1,50 @@
+.obramowanie-latest{
+    margin-top:60px;
+    left: 10%;
+    width: 80%;
+    margin-left: 40px;
+    border:1px solid rgba(0,0,0,.1);
+    border-radius: 10px;
+    height: 350px;
+    max-width: inherit;
+    min-width: inherit;
+    position: flex;
+   
+
+}
+.obramowanie-latest h5{
+    border-bottom:1px solid rgba(0,0,0,.2);
+    padding: 0 0 10px;
+    border-left:5px
+ 
+}
+
+
+
+.linijka-post-obramowanie{
+    width: inherit;
+    height: 10px;
+    max-width: inherit;
+    min-width: inherit;
+    position: flex;
+
+
+}
+
+.linijka-post-obramowanie a{
+    color:black;
+}
+.linijka-post-obramowanie p{
+    margin-left : 40px;
+    margin-right : 40px;
+    height : 40px;    
+    text-align: left;
+    position: inherit;
+
+}
+.linijka-post-obramowanie p:hover{
+    background-color: rgba(0,0,0,.2);;
+}
+
+
+
