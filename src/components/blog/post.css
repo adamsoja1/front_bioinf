@@ -1,17 +1,13 @@
 .disp{
     background-color:#F4F6F6;
-    height: flex;
-    width: flex;
-
-    position: static;
+    max-width: 100%;
     margin:20px;
     left:8%;
     -webkit-transition: background-color 2s ease-out;
     -moz-transition: background-color 2s ease-out;
     -o-transition: background-color 2s ease-out;
     transition: background-color 2s ease-out;
-    min-height:600px;
-    flex: auto;
+    min-height:700px;
     max-width: 1200;
 }
 
@@ -19,8 +15,7 @@ body{
     overflow-y:scroll;
 }
 .disp:hover{
-    background-color:#E8EAF6
-    ;
+  background-color: rgba(0,0,0,.08);
 }
 
 
@@ -36,7 +31,7 @@ p{
 
 
 .comm{
-    margin: 50px;
+    margin: 80px;
     
 }
 
@@ -62,4 +57,9 @@ div.gallery {
     text-align: center;
   }
 
+
+.display-content{
+  min-height:400px;
+
+}
 

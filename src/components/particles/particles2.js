@@ -26,10 +26,10 @@ const ParticlesConfig = {
       number: {
         density: {
           enable: true,
-          area: 1000
+          area: 1300
         },
         limit: 0,
-        value: 300
+        value: 150
       },
       opacity: {
         animation: {

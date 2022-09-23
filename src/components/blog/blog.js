@@ -145,7 +145,9 @@ function Blog(){
 
 
 
-
+                                    <div>
+                                        Mozna dodac ostatnie zdjecia
+                                        </div>
 
 
 

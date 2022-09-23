@@ -1,6 +1,6 @@
 import React from 'react';
 import {useState,useEffect} from 'react';
-
+import './tag.css'
 import { Link } from 'react-router-dom';
 
 export default function Tag(params){
@@ -20,13 +20,20 @@ export default function Tag(params){
 
     return(
         <div>
+            <div className='tag-box'>
 
-            {tags.map(tag=>(
-                <Link to ={`/${tag.tagi}/posts`}>
-                <h6>{tag.tagi}</h6>
-                </Link>
-            ))}
+                {tags.map(tag=>(
 
+                   
+                                <div className = 'tag'>
+                                    <Link to ={`/${tag.tagi}/posts`}>
+                                    <span class="tag tag-cloud-functions tag-lg">{tag.tagi}</span>
+                                    </Link>
+                                </div>
+                    
+                ))}
+
+            </div>
         </div>
     )
 

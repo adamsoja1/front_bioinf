@@ -1,0 +1,26 @@
+.gallery-box{
+    border-top: 1px solid rgba(0,0,0,.1);;
+    margin-top:50px;
+    min-height:500px;
+    margin-left:150px;
+    margin-right:150px;
+    margin-bottom:50px;
+    }
+
+.image-div{
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
+    height:140px;
+
+
+
+}
+
+.image-div img{
+    width: 180px;
+    height:140px;
+    max-width: inherit;
+    max-height: inherit;
+}

@@ -14,7 +14,9 @@ function Navbar(){
         <div class="container-fluid">
             <a class="navbar-brand" href="/" >
             <img src ={logo} style={{height:"70px",
-                                      width:"240px"}}></img>
+                                      width:"240px"}}>
+                                        
+                                      </img>
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">

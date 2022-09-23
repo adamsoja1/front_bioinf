@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import './galer.css'
 import React from 'react';
-import FetchPhotos from './gallery'
 import './Modal.css'
+import './post-gallery.css'
 
 function Photos(params){
     const apiUrl = 'http://127.0.0.1:8000'
@@ -72,9 +72,12 @@ function Photos(params){
     
     return(
         <div>
-        <div className = 'parent'>
+        <div className = 'gallery-box'>
+                    <center>
+            <h3><b>Zdjęcia</b></h3>
+          </center>
             {photos.map(photo =>(
-                <div class = 'gallery'>
+                <div class = 'image-div'>
 
                       <img src = {apiUrl + photo.photos.full_size} onClick = {()=> togglePhoto(photo.photos.full_size)}></img>
                       {localStorage.getItem('token')&&

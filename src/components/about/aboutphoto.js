@@ -19,7 +19,7 @@ export default function MemberPhoto(params){
         <div>
         {photos.map(photo =>(
             <div>
-                  <img src = {apiUrl + photo.photos.thumbnail}></img>
+                  <img src = {apiUrl + photo.photos.full_size}></img>
             </div>
     ))}
     </div>

@@ -3,11 +3,17 @@ import {useState,useEffect} from 'react';
 import Navbar from '../navbar/navBar'
 import MemberPhoto from './aboutphoto'
 import ParticlesBackgroundAbout from '../particles/particles2';
+import './about.css'
+import GoogleMapReact from 'google-map-react'
+import logo from './logo.png'
+
+
+
 
 export default function About()
 
 {
-   
+
     const [users,setUsers] = useState([])
 
     useEffect(() => {
@@ -32,18 +38,59 @@ export default function About()
             <ParticlesBackgroundAbout/>
             <Navbar/>
             <div>
-                <h2>To my:</h2>
-                <div>
+
+                <div className='page-right'>
+                    <div className='contact'>
+                        <div className='contact-content'>
+                            <h3>Kontakt</h3>
+                            <h6> <b>Email: </b> bioskn@gmail.com</h6>
+                            <h4>Dołącz do nas!</h4>
+                            <br/>
+                            <br/>
+                            <a href='https://www.facebook.com/bioinformatyczneskn'>
+
+                                <img src ={logo} style={{height:"230px",
+                                      width:"240px"}}></img>
+                                </a>
+
+
+
+
+
+
+                        
+
+                        </div>
+
+
+                            <div className='google-maps-box'>
+
+                                <GoogleMapReact/>
+
+                            </div>
+
+                    </div>
+                </div>
+
+
+
+                <div className='main-page'>
                 {users.map(user=>
                     (
-                            <div key = {user.id}>
-                                <h4>Imie : {user.user}</h4>
-                                <h6>Stanowisko : {user.position}</h6>
-                                <h6>O sobie : {user.about}</h6>
-                                <h6>Email : {user.email}</h6>
-                                <MemberPhoto id={user.id}/>
-                                {localStorage.getItem('token')&&
-                                <button onClick={()=>deleteUser(user.id)}>Usuń</button>}
+                            <div className='about-card' key = {user.id}>
+                                <div className='image-card'>
+                                    <MemberPhoto id={user.id}/>
+                                </div>
+
+                                <div className='about-card-content'>
+                                    <h6><b>Imie : </b>{user.user}</h6>
+                                    <h6><b>Stanowisko : </b>{user.position}</h6>
+                                    <h6><b>O sobie : </b>{user.about}</h6>
+                                    <h6><b>Email : </b>{user.email}</h6>
+                                    </div>
+                                    {localStorage.getItem('token')&&
+                                    <button onClick={()=>deleteUser(user.id)}>Usuń</button>}
+                                
                             </div>
                             
                     ))}

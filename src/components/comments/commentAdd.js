@@ -51,21 +51,22 @@ function Comment(params)
     
       return(
           <div>
-            <div>
+              
+            <div class = 'comments'>
                 <form > 
-                    <div class = 'container'> 
-                        <label> Nazwa uzytkowika</label>
+                    <div class ='user'> 
+                        <label> Nazwa uzytkowika  </label>
                         <input 
                         type = 'text'
                         required
                         value = {User}
                         onChange = {(e)=>setUser(e.target.value)}
-                        />
+                    />
                     </div>
-                    <div>
+                    <div class = 'content'>
                         <label> Treść </label>
                         <input
-                        type = 'tekst'
+                        type = 'text'
                         
                         value = {content}
                         onChange = {(e) => setContent(e.target.value)}
@@ -81,15 +82,25 @@ function Comment(params)
             </div>  
 
             <div>
+                
+                <br/>
+                <br/>
                     <h2>Komentarze:</h2>
+                <div className='comments-display'>
+
+               
                     {comment.map(coment=>
                     (
-                            <div key = {coment.id}>
+                            <div className='comment-box' key = {coment.id}>
                                 
-                                <h4>Uzytkownik: {coment.User}</h4>
-                                <h7  > Dodano: {coment.get_time} </h7>
-                                <h2> </h2>
+                                <h4>{coment.User}</h4>
+                             
+                                <h7> Dodano: {coment.get_time} </h7>
+                                
                                 <h6>{coment.content}</h6>
+                                <center>
+                                <h5></h5>
+                                </center>
                                 <p></p>
                             </div>
                     )
@@ -97,6 +108,7 @@ function Comment(params)
                                                 )
                     }
 
+                    </div>
         </div>
             <div>
                 

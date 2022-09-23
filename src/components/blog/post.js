@@ -34,27 +34,31 @@ function Post(props)
             <Navbar/>
             
                 <div class = 'disp'>
-                    <Tag id ={id}/>
+                    
                     {localStorage.getItem('token')&&
                         <h4><Link to={`/edit/post/${post.id}`}>Edytuj</Link></h4>
     }
-                    <h3 class = 'display-4'> Tytuł: {post.title} <h6> Dodano: {post.get_time_display}</h6> </h3> 
-
-                      <div>
+                    <h3 class = 'display-4'> <b>{post.title}</b>  </h3> 
+                    <h8> {post.get_time_display}</h8>
+                      <div className='display-content'>
                           <p>
                           {post.content} 
                           </p>
                           </div>   
-                          <h4>Wyswietlenia: {post.views} </h4>       
-
+                          <h6>Wyswietlenia: {post.views} </h6>       
+     
                         <Photos id = {id}/>
-
+                     
                  </div> 
+                 <div>
+                 <Tag id ={id}/>
+                 </div>
+                 <br/>
             <div>
                 
             </div>
 
-
+            Spodobał się post? Skomentuj!
             <div class = 'comm'>
                  
                      <Comment numer = {id}/>

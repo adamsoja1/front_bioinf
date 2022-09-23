@@ -1,7 +1,39 @@
-h4,h7{
+h4{
     display:inline;
     margin:30px;
     margin-bottom: 50px;
    
     
+}
+
+
+.comments{
+    left:50%;
+    right:50%;
+    
+
+}
+
+.user{
+   margin-right: 80px;
+}
+.content{
+    margin-right: 80px;
+    margin-left:94px;
+    margin-bottom: 20px;
+}
+.comment-box{
+margin-top:40px;
+}
+
+.comment-box h5{
+    border-bottom:1px solid rgba(0,0,0,.2);
+    width:300px;
+    left:50%;
+    right: 50%;
+    
+}
+
+.comment-box h6{
+    margin-top:5px;
 }
