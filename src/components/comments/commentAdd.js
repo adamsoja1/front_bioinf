@@ -11,19 +11,28 @@ function Comment(params)
     const [User,setUser] = useState('');
     const post = params.numer;
     const[isPending,setIsPending] = useState(false);
+    const[isLoaded,setIsLoaded] = useState(false);
   
+
+    try{
     useEffect(() => {
+        
         const fetchData = async () => {
         const result = await fetch(`http://127.0.0.1:8000/comments/post/${params.numer}/`)
         const jsonResult = await result.json()
         
         
         setComment(jsonResult)
+        setIsLoaded(true)
         }
      fetchData();
     
 
     },[]);
+        }catch(error){
+            setIsLoaded(false)
+        }
+
 
    
 
@@ -59,6 +68,7 @@ function Comment(params)
                         <input 
                         type = 'text'
                         required
+                        maxLength='10'
                         value = {User}
                         onChange = {(e)=>setUser(e.target.value)}
                     />
@@ -82,10 +92,25 @@ function Comment(params)
             </div>  
 
             <div>
+
                 
                 <br/>
                 <br/>
                     <h2>Komentarze:</h2>
+                    {!isLoaded &&
+                    <div>
+                                
+                    <div>
+                    <center> 
+                        <h2>Ładuję ...</h2>
+                    </center>
+                    </div>
+                    <center>
+                <div class="spinner-border" role="status"></div>
+                    </center>     
+                    </div>
+                    }
+                    {isLoaded &&
                 <div className='comments-display'>
 
                
@@ -108,7 +133,7 @@ function Comment(params)
                                                 )
                     }
 
-                    </div>
+                    </div>}
         </div>
             <div>
                 

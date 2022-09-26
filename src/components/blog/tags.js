@@ -7,13 +7,17 @@ export default function Tag(params){
 
 
     const [tags,setTags] = useState([]);
-
+    const [isLoaded,setIsLoaded] = useState(false)
 
 
     useEffect(()=>{
         fetch(`http://127.0.0.1:8000/tags/post/${params.id}`)
         .then(result=>result.json())
         .then((result)=>setTags(result))
+        .catch((error)=>{
+            setIsLoaded(false)
+        })
+        .then(setIsLoaded(true))
 
     },[]);
 

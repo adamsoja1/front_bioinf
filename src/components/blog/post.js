@@ -13,14 +13,14 @@ function Post(props)
     
     const {id} = useParams();
     const [post, setPost] = useState('');
-    
+    const [loaded,setLoaded] = useState(false)
 
 
     useEffect(() => {
             fetch(`http://127.0.0.1:8000/api/posts/${id}/`)
             .then(res => res.json())
             .then((res)=> setPost(res))
-           
+            .then(setLoaded(true))
           
         },[]);
      
@@ -32,7 +32,20 @@ function Post(props)
     return(
         <div>  
             <Navbar/>
-            
+            {!loaded &&
+                    <div>
+                                
+                    <div>
+                    <center> 
+                        <h2>Ładuję ...</h2>
+                    </center>
+                    </div>
+                    <center>
+                <div class="spinner-border" role="status"></div>
+                    </center>     
+                    </div>
+            }
+            {loaded &&
                 <div class = 'disp'>
                     
                     {localStorage.getItem('token')&&
@@ -50,6 +63,7 @@ function Post(props)
                         <Photos id = {id}/>
                      
                  </div> 
+}
                  <div>
                  <Tag id ={id}/>
                  </div>
@@ -64,7 +78,7 @@ function Post(props)
                      <Comment numer = {id}/>
                 </div>
             </div>       
-                         
+
                  
                  
             

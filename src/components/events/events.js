@@ -1,20 +1,25 @@
 import React from 'react';
 import {useState,useEffect} from 'react';
-import App4 from '../navbar/navBar'
-import './wyglad.css'
+import Navbar from '../navbar/navBar'
+import '../blog/wyglad.css'
 import { Link } from 'react-router-dom';
+import './events.css'
+
+
+const url = 'http://127.0.0.1:8000'
+
 
 export default function Events(){
 
     const [items,setItems] = useState([]);
-
+    const [isLoaded,setIsLoaded] = useState(false)
 
     useEffect(()=>{
         fetch('http://127.0.0.1:8000/events')
 
         .then(result=>result.json())
         .then((result)=>setItems(result))
-      
+        .then(setIsLoaded(true))
 
 
     },[]);
@@ -23,33 +28,36 @@ export default function Events(){
 
     return(
         <div>
-            <App4/>
+            <Navbar/>
         
         <div class = 'container'>
-            
-            <div class ='row align-items-center'>
-                
-                {items.map(item=>(                                               
-                    <div class = 'col-6 .--4col-' key={item.id}>
-                     <Link to={`/post/${item.get_absolute_url}/${item.id}`}>
-                     <div class ='blog-diw'>
-                     
+            <div>
+                {items.map(item=>(
+                    <div className='event-post'>
+                             <div> <h1> {item.title} </h1>
+                                  <div class = 'content-diw2'> {item.content.substring(0,100)}...       <Link to={{
+                                        pathname:`/post/${item.get_absolute_url}/${item.id}`,
+                                        search: ``,
+                                        state:{stateParam:true},
+                                }}>       
+                                    <a>Więcej...</a>
+                                    
+                                    </Link> 
+                                  </div>
+
+                           
+
+                                 {item.photos.length>0 &&
+                                  <img src = {url + item.photos[0].photos.full_size}></img>
+                                }
+                                </div>
+
                         
-                        <div >
-                        
-                            <div class ='a' >Tytuł: {item.title}
-                              <div class = 'content-diw'> {item.content.substring(0,100)}...</div>
-                            </div>   
-                                            
                         </div>
-                        
-                    </div>
-                
-                    </Link>
-                    </div>     
-                    ))}
                     
-                </div>
+                ))}
+            </div>
+
 
             </div>
             </div>

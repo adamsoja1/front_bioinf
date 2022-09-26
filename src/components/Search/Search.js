@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 import Navbar from '../navbar/navBar'
 import { useParams } from "react-router-dom";
 import '../blog/wyglad.css'
+import './search.css'
 
+const url = 'http://127.0.0.1:8000'
 
 export default function SearchQueryContent(){
     const [post,setPost] = useState([]);
@@ -24,9 +26,19 @@ export default function SearchQueryContent(){
         <div>
             <Navbar/>
         
-        <div class = 'container'>
-        <input placeholder="Czego szukasz?" onChange={event => setQuery(event.target.value)} />
-            <div class ='row align-items-center'>
+        <div>
+        
+        <div className='search-div'>
+        <form action="">
+        <input type="search"  onChange={event => setQuery(event.target.value)} required/>
+        <i class="fa fa-search"></i>
+        <a href="javascript:void(0)" id="clear-btn">Clear</a>
+        </form>
+        </div>
+
+
+
+            <div className='left'>
             {
                 post.filter(item => {
                     if (query === '') {
@@ -37,25 +49,47 @@ export default function SearchQueryContent(){
                         return item;
                     }
                 })
-                .map((item=>(                                               
-                    <div class = 'col-6 .--4col-' key={item.id}>
-                     <Link to={`/post/${item.get_absolute_url}/${item.id}`}>
-                     <div class ='blog-diw'>                                          
-                        <div >
+                .map(item=>(                                               
+
+                    <div>
+                     
+
                         
-                            <div class ='a' >Tytuł: {item.title}| Autor: {item.author} 
-                              <div class = 'content-diw'> {item.content.substring(0,100)}...</div>
-                              {item.event && <p>Wydarzenie</p>}
-                              {!item.event && <p>Post</p>}
+                        <div  class ='blog-diw2'>
+                    
+                        
+                            <div> <h1> {item.title} </h1>
+                              <div class = 'content-diw2'> {item.content.substring(0,100)}...       <Link to={{
+                                    pathname:`/post/${item.get_absolute_url}/${item.id}`,
+                                    search: ``,
+                                    state:{stateParam:true},
+                            }}>       
+                                <a>Więcej...</a>
+                                
+                                </Link> 
+                              </div>
+
+                       
+
+                             {item.photos.length>0 &&
+                              <img src = {url + item.photos[0].photos.full_size}></img>
+                            }
+
+
+                              
+
+
+                                
                             </div>   
-                                            
+                            
                         </div>
                         
-                    </div>
                 
-                    </Link>
-                    </div>     
-                    )))}
+                    
+                    
+                   
+                       </div>
+                        ))}
                     
                 </div>
 

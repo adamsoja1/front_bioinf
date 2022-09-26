@@ -9,18 +9,39 @@ import Navbar from '../navbar/navBar'
 
     const [post,setPost] = useState([]);
     const {nazwa} = useParams();
+    const [isLoaded,setIsLoaded] = useState(false)
 
     useEffect(()=>{
         fetch(`http://127.0.0.1:8000/filter/post/${nazwa}`)
         .then(result => result.json())
         .then((result) => setPost(result))
+        .catch((error) =>{
+
+            setIsLoaded(false)
+        })
+        .then(setIsLoaded(true))
     },[])
 
 
     return(
+        
         <div>
             <Navbar/>
-        
+
+        <div>
+            {!isLoaded &&
+            <div>
+                                
+            <div>
+            <center> 
+                <h2>Ładuję ...</h2>
+            </center>
+            </div>
+            <center>
+        <div class="spinner-border" role="status"></div>
+            </center>     
+            </div>}
+            {isLoaded &&
         <div class = 'container'>
             
             <div class ='row align-items-center'>
@@ -48,6 +69,10 @@ import Navbar from '../navbar/navBar'
                 </div>
 
             </div>
+                    }
+
+            </div>
+
             </div>
         )
     }

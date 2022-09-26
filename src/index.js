@@ -20,6 +20,7 @@ import PostRubbish from './components/post-actions/postsRUBBISH';
 import Allcomments from './components/comments/comments-all'
 import registeredMembers from './components/about/members';
 import CreateGallery from './components/Gallery/gallery-add'
+import Declaration from './components/declaration/declaration';
 
 ReactDOM.render((
   <Router>
@@ -39,6 +40,7 @@ ReactDOM.render((
     <Route exact path = '/comments-all' component = {Allcomments}/>
     <Route exact path ='/members' component ={registeredMembers}/>
     <Route exact path ='/gallery-add' component = {CreateGallery}/>
+    <Route exact path ='/declaration-input' component={Declaration}/>
   </Router>
   ),
   document.getElementById('root')

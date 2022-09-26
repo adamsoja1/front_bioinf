@@ -45,9 +45,10 @@ function Navbar(){
         <a class="dropdown-item" href="https://www.polsl.pl/rau/">AEI</a>
       </div>
     </li>
-    {!localStorage.getItem('token')&&<li class="nav-item">
-          <a class="nav-link "href='/login'>Login</a>
-        </li>}
+    <li class="nav-item">
+          <a class="nav-link "href='/declaration-input'>Dołącz do nas</a>
+          </li>
+
     {localStorage.getItem('token')&&<li class="nav-item">
           <a class="nav-link "href='/login' onClick={Logout}>Logout</a>
         </li>}

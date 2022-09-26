@@ -7,7 +7,7 @@ import './post-gallery.css'
 function Photos(params){
     const apiUrl = 'http://127.0.0.1:8000'
     const [photos, setPhotos] = useState([])
-    const [isPending,setIsPending] = useState()
+    const [isLoaded,setIsLoaded] = useState(false)
     
     if(modal) {
         document.body.classList.add('active-modal')
@@ -31,6 +31,7 @@ function Photos(params){
         fetch(`http://127.0.0.1:8000/photos/post/${params.id}`)
         .then(result => result.json())
         .then((result) => setPhotos(result))
+        .then(setIsLoaded(true))
     },[])
 
 
@@ -44,7 +45,6 @@ function Photos(params){
             console.log(images[i])
             uploadData.append('photos',images[i]);
         }}
-        setIsPending(true)
         fetch(`http://127.0.0.1:8000/photo-add-post/${params.id}`, {
           method: 'POST',
           headers: { Authorization : `Token ${localStorage.getItem('token')}`},
@@ -71,7 +71,23 @@ function Photos(params){
       
     
     return(
+      <div>
+        {!isLoaded && 
         <div>
+                                
+        <div>
+        <center> 
+            <h2>Ładuję ...</h2>
+        </center>
+        </div>
+        <center>
+    <div class="spinner-border" role="status"></div>
+        </center>     
+        </div>
+        }
+      {isLoaded &&
+        <div>
+          
         <div className = 'gallery-box'>
                     <center>
             <h3><b>Zdjęcia</b></h3>
@@ -103,6 +119,7 @@ function Photos(params){
                             </div>}
 
         </div>
+  
         {localStorage.getItem('token')&&
            <div>           
         <br/>
@@ -115,6 +132,8 @@ function Photos(params){
           </div>}
  
         </div>
+            }
+            </div>
     )
 }
 
