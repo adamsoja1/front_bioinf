@@ -16,20 +16,35 @@ const url = 'http://127.0.0.1:8000'
 
 function Blog(){
     const [items,setItems] = useState([])
+    const [data,setData] = useState({})
+    const[newItems,setNewItems] = useState([])
+    const [nextPage,setNextPage] = useState([])
     const [isLoaded,setIsLoaded] = useState(false)
-
     const [lastPosts,setLastPosts] = useState([])
     const [mostViewedPosts,setMostViewedPosts] = useState([]);
-    useEffect(()=>{
-        fetch('http://127.0.0.1:8000/view-posts')
-        .then(res=>res.json())
-        .then((res)=> setItems(res))
-        .then(setIsLoaded(true))
-        .catch((error) =>{
-            setIsLoaded(false)
-        })
-    },[])
+    const [noPage,setNoPage] = useState(false)
+
+    console.log(nextPage)
+
+    useEffect(() => {
+        
+        const fetchData = async () => {
+        const result = await fetch('http://127.0.0.1:8000/view-posts?p=1')
+        const jsonResult = await result.json()
+        
+        
+        setNextPage(jsonResult.next)
+        setItems(jsonResult.results)
+
+        setIsLoaded(true)
+        }
+     fetchData();
     
+
+    },[]);
+    
+
+
     useEffect(()=>{
         fetch('http://127.0.0.1:8000/latest-posts')
         .then(res=>res.json())
@@ -38,6 +53,8 @@ function Blog(){
             setIsLoaded(false)
         })
     },[])
+
+
 
 
 
@@ -53,6 +70,19 @@ function Blog(){
     
 
 
+
+    const fetchNext = async()=>{
+
+        const result = await fetch(nextPage)
+        const jsonResult = await result.json()
+        
+        setItems(oldItems => [...oldItems,...jsonResult.results])
+        setNextPage(jsonResult.next)
+        
+
+
+    }
+
  const DeletePost = (id)=>{
             fetch(`http://127.0.0.1:8000/post-edit/${id}`,
                 {
@@ -64,11 +94,13 @@ function Blog(){
             .then((res)=> setItems(res))
  
         }
-    
+
 
 
         return(
             <div>
+        
+          
             {!isLoaded &&
                 <div>
                            
@@ -212,12 +244,15 @@ function Blog(){
                        
                            </div>
                             ))}
+
+                            {nextPage&&
+                                    <button onClick={()=>fetchNext()}>Wiecej..</button>}
+
                         </div>
                         
-                    
                     </div>
-                    </div>
-                    }
+                                   
+                    </div>}
                 </div>
 
             )

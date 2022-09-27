@@ -16,7 +16,7 @@ export default function SearchQueryContent(){
     useEffect(()=>{
         fetch('http://127.0.0.1:8000/view-posts')
         .then(result => result.json())
-        .then((result) => setPost(result))
+        .then((result) => setPost(result.results))
     },[])
 
 
