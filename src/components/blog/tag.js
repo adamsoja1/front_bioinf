@@ -3,18 +3,22 @@ import {useState,useEffect} from 'react';
 import { useParams } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import Navbar from '../navbar/navBar'
+import './wyglad.css'
+import './tag.css'
+
+const url = 'http://127.0.0.1:8000'
 
 
  export default function GetPostByTag(){
 
-    const [post,setPost] = useState([]);
+    const [items,setItems] = useState([]);
     const {nazwa} = useParams();
     const [isLoaded,setIsLoaded] = useState(false)
 
     useEffect(()=>{
         fetch(`http://127.0.0.1:8000/filter/post/${nazwa}`)
         .then(result => result.json())
-        .then((result) => setPost(result))
+        .then((result) => setItems(result))
         .catch((error) =>{
 
             setIsLoaded(false)
@@ -24,56 +28,42 @@ import Navbar from '../navbar/navBar'
 
 
     return(
-        
         <div>
             <Navbar/>
-
-        <div>
-            {!isLoaded &&
-            <div>
-                                
-            <div>
-            <center> 
-                <h2>Ładuję ...</h2>
-            </center>
-            </div>
-            <center>
-        <div class="spinner-border" role="status"></div>
-            </center>     
-            </div>}
-            {isLoaded &&
+        
         <div class = 'container'>
-            
-            <div class ='row align-items-center'>
-                
-                {post.map(item=>(                                               
-                    <div class = 'col-6 .--4col-' key={item.id}>
-                     <Link to={`/post/${item.get_absolute_url}/${item.id}`}>
-                     <div class ='blog-diw'>                                          
-                        <div >
+            <h3>Wydarzenia</h3>
+            <div>
+                {items.map(item=>(
+                    <div className='blog-diw2'>
+                             <div> <h1> {item.title} </h1>
+                                  <div class = 'content-diw2'> {item.content.substring(0,100)}...       <Link to={{
+                                        pathname:`/post/${item.get_absolute_url}/${item.id}`,
+                                        search: ``,
+                                        state:{stateParam:true},
+                                }}>       
+                                    <a>Więcej...</a>
+                                    
+                                    </Link> 
+                                  </div>
+
+                           
+
+                                 {item.photos.length>0 &&
+                                  <img src = {url + item.photos[0].photos.full_size}></img>
+                                }
+                                </div>
+
                         
-                            <div class ='a' >Tytuł: {item.title}| Autor: {item.author} 
-                              <div class = 'content-diw'> {item.content.substring(0,100)}...</div>
-                              {item.event && <p>Wydarzenie</p>}
-                              {!item.event && <p>Post</p>}
-                            </div>   
-                                            
                         </div>
-                        
-                    </div>
-                
-                    </Link>
-                    </div>     
-                    ))}
                     
-                </div>
-
-            </div>
-                    }
-
+                ))}
             </div>
 
+
             </div>
+            </div>
+ 
         )
     }
 

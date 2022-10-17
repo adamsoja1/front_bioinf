@@ -9,8 +9,9 @@ function Navbar(){
  
     return(
    <div>
-    <nav class="navbar navbar-expand-lg navbar-dark" style = {{backgroundColor : "#454f54",
-                                                               position:'fixed!important'  }}>
+    <nav class="navbar navbar-expand-lg navbar-dark" style = {{backgroundColor : "#661f35cc",
+                                                               position:'fixed!important',
+                                                                 }}>
         <div class="container-fluid">
             <a class="navbar-brand" href="/" >
             <img src ={logo} style={{height:"70px",

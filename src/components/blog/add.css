@@ -7,3 +7,14 @@
 #rozmiar{
     width:900px;
 }
+
+
+.tags-left{
+    width : 50%;
+    float:left;
+}
+
+.tags-right{
+    width : 50%;
+    float:right;
+}

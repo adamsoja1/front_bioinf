@@ -90,11 +90,17 @@ const Create = () => {
       setPut_tag(tags=>[...tags,tag])
     }
   }
+
   const deleteFromUpload = (tag) =>{
     var arr = put_tag
-    arr.pop(tag)
-    setPut_tag(tags=>[arr])
+    for (var i=arr.length -1; i>=0;i--){
+      if(arr[i] == tag){
+        arr.splice(i,1);
+      }
+    }
+    setPut_tag(()=>[arr])
   }
+  
   console.log(put_tag)
   return (
     <div class="container" id='rozmiar'>
@@ -169,7 +175,7 @@ const Create = () => {
             </div>
             
           
-
+        <div className='tags-left'>
            <h3>Dostepne tagi:</h3>
               {tags.map(tag=>(
                 <div>
@@ -177,6 +183,8 @@ const Create = () => {
                  </div>
                   
               ))}
+            </div>
+            <div className='tags-right'>
             <h3>Dodane tagi:</h3>
             {put_tag.map(tags=>(
                 <div>
@@ -184,6 +192,7 @@ const Create = () => {
                  </div>
                   
               ))}
+          </div>
             </div>
       </div>
     </div>

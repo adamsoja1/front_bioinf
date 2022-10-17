@@ -2,11 +2,11 @@ import React from 'react';
 import {useState,useEffect} from 'react';
 import Navbar from '../navbar/navBar'
 import MemberPhoto from './aboutphoto'
-import ParticlesBackgroundAbout from '../particles/particles2';
+
 import './about.css'
 import GoogleMapReact from 'google-map-react'
 import logo from './logo.png'
-
+import ParticlesBackground from '../particles/particles';
 
 
 
@@ -35,7 +35,7 @@ export default function About()
 
     return (
         <div>
-            <ParticlesBackgroundAbout/>
+            <ParticlesBackground/>
             <Navbar/>
             <div>
 

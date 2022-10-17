@@ -31,6 +31,7 @@ export default function Events(){
             <Navbar/>
         
         <div class = 'container'>
+            <h3>Wydarzenia</h3>
             <div>
                 {items.map(item=>(
                     <div className='event-post'>
