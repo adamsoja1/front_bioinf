@@ -27,7 +27,7 @@ export default function CreateGallery(){
     
         console.log(uploadData)
         setIsPending(true)
-        fetch('http://127.0.0.1:8000/gallery-add', {
+        fetch('http://127.0.0.1:8000/gallery/add', {
           method: 'POST',    
           headers: { Authorization : `Token ${localStorage.getItem('token')}`},
           body: uploadData

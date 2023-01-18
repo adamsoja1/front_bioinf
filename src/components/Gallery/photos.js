@@ -45,7 +45,7 @@ function Photos(params){
             console.log(images[i])
             uploadData.append('photos',images[i]);
         }}
-        fetch(`http://127.0.0.1:8000/photo-add-post/${params.id}`, {
+        fetch(`http://127.0.0.1:8000/post/add/photo/${params.id}`, {
           method: 'POST',
           headers: { Authorization : `Token ${localStorage.getItem('token')}`},
           body: uploadData
@@ -58,7 +58,7 @@ function Photos(params){
 
       const deletePhoto = (photo_id) => {
 
-        fetch(`http://127.0.0.1:8000/photo-delete/${photo_id}/post/${params.id}`, {
+        fetch(`http://127.0.0.1:8000/photo/delete/${photo_id}/post/${params.id}`, {
           method: 'DELETE',
           headers: { Authorization : `Token ${localStorage.getItem('token')}`},
         })

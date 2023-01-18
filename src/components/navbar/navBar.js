@@ -36,6 +36,9 @@ function Navbar(){
         <li class="nav-item">
           <a class="nav-link "href='/search'>Szukaj</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href='/download'>Do pobrania</a>
+        </li>
       
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -47,7 +50,7 @@ function Navbar(){
       </div>
     </li>
     <li class="nav-item">
-          <a class="nav-link "href='/declaration-input'>Dołącz do nas</a>
+          <a class="nav-link "href='/formularz'>Dołącz do nas</a>
           </li>
 
     {localStorage.getItem('token')&&<li class="nav-item">

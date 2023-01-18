@@ -12,8 +12,9 @@ export default function Declaration(){
     const [wydzial,setWydzial] = useState()
     const [kierunek,setKierunek] = useState()
     const [rok,setRok] = useState()
+    const [subscription, setSubscription] = useState()
     const [uploaded,setIsUploaded] = useState(false)
-    const[success,setSuccess] = useState()
+    const [success,setSuccess] = useState()
 
 
 
@@ -21,7 +22,7 @@ export default function Declaration(){
     function sendData(){
         
         const data = {nick,name,surname,email,number,wydzial,kierunek,rok}
-            if(nick == undefined||name==undefined||surname==undefined||email==undefined||number==undefined||wydzial==undefined||kierunek==undefined||rok==undefined){
+            if(nick == undefined||name==undefined||surname==undefined||email==undefined||number==undefined||wydzial==undefined||kierunek==undefined||rok==undefined||subscription==undefined){
                 setSuccess('Uzupełnij wszystkie pola!')
 
             }else{        
@@ -36,6 +37,17 @@ export default function Declaration(){
                 .then(setIsUploaded(true))
                 .then(setSuccess('Wysłano!'))}
             
+
+    }
+
+    function true_false(){
+        var checkbox = document.getElementbyId('mybox')
+        if (checkbox==true){
+            setSubscription(true)
+        }
+        else{
+            setSubscription(false)
+        }
 
     }
 
@@ -55,8 +67,9 @@ export default function Declaration(){
                          <input required value={nick} type="text" class="css-input" onChange={(e)=>setNick(e.target.value)}/>
                      </center>
                  </div>
+
                 <div className='left-side'>
-                    <h7>Imię   </h7>
+                    <h7>Imię  </h7>
                 <input required value={name} type="text" class="css-input" onChange={(e)=>setName(e.target.value)}/>
                 </div>
 
@@ -64,6 +77,7 @@ export default function Declaration(){
                 <h7>Nazwisko </h7>
                 <input required value = {surname} onChange={(e)=>setSurname(e.target.value)} type="text" class="css-input" />
                 </div>
+
                 <div className = 'left-side'>
                 <h7>Email </h7>
                 <input required value={email} onChange={(e)=>setEmail(e.target.value)} type="text" class="css-input" />
@@ -74,30 +88,39 @@ export default function Declaration(){
                 <input required value={number} onChange={(e)=>setNumber(e.target.value)} type="text" class="css-input" />
                 </div>
 
+                <div className='left-side'>
+                <h7>Kierunek </h7>
+                <input required value={kierunek} onChange={(e)=>setKierunek(e.target.value)} type="text" class="css-input" />
+                </div>
 
                 <div className='right-side'>
                 <h7>Wydział </h7>
                 <input required value={wydzial} onChange={(e)=>setWydzial(e.target.value)} type="text" class="css-input" />
                 </div>
 
-                <div className='left-side'>
-                <h7>Kierunek </h7>
-                <input required value={kierunek} onChange={(e)=>setKierunek(e.target.value)} type="text" class="css-input" />
-                </div>
-
                 <div>
                 <h7>Rok studiów </h7>
                 <input required value={rok} onChange={(e)=>setRok(e.target.value)} type="number" min='1' max='5' class="css-input" />
                 </div>
+
+                <div>
+                    <center>
+                        <h7> Zgoda na rodo </h7>
+                        <input id="mybox" required value={subscription} onChange='true_false' type="checkbox" class="css-input"/>
+
+                    </center>
+                </div>
                 <center>
+                    
                     {!uploaded&&
                     <button className='button-12' onClick = {sendData} type='submit'>Wyślij</button>}
                     {uploaded &&
                     <button disabled className='button-12'  type='submit'>Wyślij</button>
                     }
+
                 </center>
-               
-                <h3>{success}</h3>
+
+                
             </div>
            
         </div>

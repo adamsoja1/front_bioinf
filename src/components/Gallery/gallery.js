@@ -46,7 +46,7 @@ export default function FetchPhotos(){
 
 
     const deletePhoto = (id) =>{
-        fetch(`http://127.0.0.1:8000/delete-gallery-photo/${id}`,
+        fetch(`http://127.0.0.1:8000/gallery/delete/photo/${id}`,
         {
             method: 'DELETE',
             headers: { "Content-Type": "application/json" ,
@@ -59,7 +59,7 @@ export default function FetchPhotos(){
         }
     
     const deleteGallery = (id) =>{
-        fetch(`http://127.0.0.1:8000/gallery-delete/${id}`,
+        fetch(`http://127.0.0.1:8000/gallery/delete/${id}`,
         {
             method: 'DELETE',
             headers: { "Content-Type": "application/json" ,
@@ -77,7 +77,7 @@ export default function FetchPhotos(){
             for(let i=0;i<=photos.length;i++){
               uploadData.append('photos',photos[i]);
             }}
-        fetch(`http://127.0.0.1:8000/gallery-delete/${id}`, {
+        fetch(`http://127.0.0.1:8000/gallery/delete/${id}`, {
         method: 'POST',
         headers: { Authorization : `Token ${localStorage.getItem('token')}`},
         body: uploadData
