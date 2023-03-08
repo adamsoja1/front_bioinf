@@ -12,7 +12,7 @@ export default function Declaration(){
     const [wydzial,setWydzial] = useState()
     const [kierunek,setKierunek] = useState()
     const [rok,setRok] = useState()
-    const [subscription, setSubscription] = useState()
+    const [subscription, setSubscription] = useState(true)
     const [uploaded,setIsUploaded] = useState(false)
     const [success,setSuccess] = useState()
 

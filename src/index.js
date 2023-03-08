@@ -21,7 +21,7 @@ import Allcomments from './components/comments/comments-all'
 import registeredMembers from './components/about/members';
 import CreateGallery from './components/Gallery/gallery-add'
 import Declaration from './components/declaration/declaration';
-import Downloadable from './components/downloadable/downloadble';
+import Downloadable from './components/downloadable/downloadable';
 
 ReactDOM.render((
   <Router>

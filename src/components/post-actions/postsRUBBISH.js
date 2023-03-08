@@ -21,7 +21,7 @@ export default function PostRubbish(){
     const [isLoaded,setIsLoaded] = useState(false)
 
     useEffect(()=>{
-        fetch('http://127.0.0.1:8000/posts/deleted')
+        fetch('http://127.0.0.1:8000/post/deleted')
         .then(res=>res.json())
         .then((res)=> setItems(res))
         .then(setIsLoaded(true))
@@ -31,7 +31,7 @@ export default function PostRubbish(){
     },[])
 
     const Deletion = (id)=>{
-        fetch(`http://127.0.0.1:8000/posts/deletion/${id}`,
+        fetch(`http://127.0.0.1:8000/post/deletion/${id}`,
             {
                 method: 'DELETE',
                 headers: { "Content-Type": "application/json" ,
@@ -42,7 +42,7 @@ export default function PostRubbish(){
 
     }
     const Recovery = (id) =>{
-    fetch(`http://127.0.0.1:8000/posts/deletion/${id}`,
+    fetch(`http://127.0.0.1:8000/post/deletion/${id}`,
     {
         method: 'PUT',
         headers: { "Content-Type": "application/json" ,

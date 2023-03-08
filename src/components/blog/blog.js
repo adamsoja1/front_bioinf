@@ -17,7 +17,7 @@ const url = 'http://127.0.0.1:8000'
 function Blog(){
     const [items,setItems] = useState([])
     const [data,setData] = useState({})
-    const[newItems,setNewItems] = useState([])
+    const [newItems,setNewItems] = useState([])
     const [nextPage,setNextPage] = useState([])
     const [isLoaded,setIsLoaded] = useState(false)
     const [lastPosts,setLastPosts] = useState([])
@@ -84,7 +84,7 @@ function Blog(){
     }
 
  const DeletePost = (id)=>{
-            fetch(`http://127.0.0.1:8000/post-edit/${id}`,
+            fetch(`http://127.0.0.1:8000/post/edit/${id}`,
                 {
                     method: 'DELETE',
                     headers: { "Content-Type": "application/json" ,
@@ -197,38 +197,28 @@ function Blog(){
                 <div>
 
                     {items.map(item=>(                                               
-
                         <div>
-                         
-
-                            
                             <div  class ='blog-diw2'>
                         
                             
                                 <div> <h1> {item.title} </h1>
-                                  <div class = 'content-diw2'> {item.content.substring(0,100)}...       <Link to={{
+                                    <div class = 'content-diw2'> {item.content.substring(0,100)}...       <Link to={{
                                         pathname:`/post/${item.get_absolute_url}/${item.id}`,
                                         search: ``,
                                         state:{stateParam:true},
-                                }}>       
+                                    }}>       
                                     <a>Więcej...</a>
                                     
                                     </Link> 
-                                  </div>
+                                    </div>
 
                            
 
                                  {item.photos.length>0 &&
                                   <img src = {url + item.photos[0].photos.full_size}></img>
                                 }
-
- 
-                                  
-
-
                                     
                                 </div>   
-                                
                             </div>
                             
                     
