@@ -5,14 +5,27 @@ import {useState,useEffect} from 'react';
 import './wyglad-boxow.css'
 import { Link } from 'react-router-dom';
 import Particles from 'react-tsparticles';
-import ParticlesBackground from '../particles/particles';
+import InfiniteScroll from 'react-infinite-scroller';
 const url = 'http://127.0.0.1:8000'
 
 
 
+/*
+function componentWillMount(){
+  window.addEventListener('scroll', this.loadMore);
+}
 
+function componentWillUnmount(){
+    window.removeEventListener('scroll', this.loadMore);
+}
 
-
+function loadMore(fetchNext){
+    if (window.innerHeight + document.documentElement.scrollTop === document.scrollingElement.scrollHeight) {
+        // Do load more content here!
+        fetchNext()
+    }
+}
+*/
 
 function Blog(){
     const [items,setItems] = useState([])
@@ -25,24 +38,25 @@ function Blog(){
     const [noPage,setNoPage] = useState(false)
 
     console.log(nextPage)
+    //componentWillMount();
 
     useEffect(() => {
-        
+
         const fetchData = async () => {
         const result = await fetch('http://127.0.0.1:8000/view-posts?p=1')
         const jsonResult = await result.json()
-        
-        
+
+
         setNextPage(jsonResult.next)
         setItems(jsonResult.results)
 
         setIsLoaded(true)
         }
      fetchData();
-    
+
 
     },[]);
-    
+
 
 
     useEffect(()=>{
@@ -67,7 +81,7 @@ function Blog(){
             setIsLoaded(false)
         })
     },[])
-    
+
 
 
 
@@ -75,13 +89,15 @@ function Blog(){
 
         const result = await fetch(nextPage)
         const jsonResult = await result.json()
-        
+
         setItems(oldItems => [...oldItems,...jsonResult.results])
         setNextPage(jsonResult.next)
-        
+
 
 
     }
+
+    //loadMore(fetchNext);
 
  const DeletePost = (id)=>{
             fetch(`http://127.0.0.1:8000/post/edit/${id}`,
@@ -92,26 +108,26 @@ function Blog(){
             })
             .then(res=>res.json())
             .then((res)=> setItems(res))
- 
+
         }
 
 
 
         return(
             <div>
-        
-          
+
+
             {!isLoaded &&
                 <div>
-                           
+
                            <div>
-                           <center> 
+                           <center>
                                <h2>Ładuję ...</h2>
                            </center>
                      </div>
                      <center>
                        <div class="spinner-border" role="status"></div>
-                      </center>     
+                      </center>
                      </div>
                    }
 
@@ -121,7 +137,7 @@ function Blog(){
 
 
                     <div className = 'obramowanie-latest'>
-                        <div> 
+                        <div>
                         <h5>Ostatnio dodane:</h5>
                             {lastPosts.map(post=>(
                                 <div className='linijka-post-obramowanie'>
@@ -130,13 +146,13 @@ function Blog(){
                                             pathname:`/post/${post.get_absolute_url}/${post.id}`,
                                             search: ``,
                                             state:{stateParam:true},
-                                            
-                
-                                    }}>  
+
+
+                                    }}>
                                         <p>
-                       
-                                            <b>{post.title}</b> &nbsp; &nbsp; &nbsp;    Data:{post.get_time_display} 
-                                            
+
+                                            {post.get_date_display} &nbsp;&nbsp;&nbsp; <b>{post.title}</b>
+
                                         </p>
                                         </Link>
                                     </div>
@@ -144,13 +160,13 @@ function Blog(){
 
                             ))}
                         </div>
-                    </div> 
+                    </div>
 
 
 
 
                     <div className = 'obramowanie-latest'>
-                        <div> 
+                        <div>
                         <h5>Najchętniej oglądane:</h5>
                             {mostViewedPosts.map(post=>(
                                 <div className='linijka-post-obramowanie'>
@@ -159,13 +175,14 @@ function Blog(){
                                             pathname:`/post/${post.get_absolute_url}/${post.id}`,
                                             search: ``,
                                             state:{stateParam:true},
-                                            
-                
-                                    }}>  
+
+
+                                    }}>
                                         <p>
-                       
-                                        <b>{post.title}</b> &nbsp; &nbsp; &nbsp; Wyświetlenia: {post.views}
-                                            
+
+
+                                        {post.get_date_display} &nbsp;&nbsp;&nbsp; <b>{post.title}</b>
+
                                         </p>
                                         </Link>
                                     </div>
@@ -173,56 +190,56 @@ function Blog(){
 
                             ))}
                         </div>
-                    </div> 
+                    </div>
 
 
 
                                     <div>
-                                        Mozna dodac ostatnie zdjecia
                                         </div>
 
 
 
 
 
-                </div>                
-                
+                </div>
 
-                
-                
+
+
+
                 <div className='left'>
                     <div className='tekst'>
                 <h3>Nowości</h3>
                     </div>
                 <div>
 
-                    {items.map(item=>(                                               
+                    {items.map(item=>(
                         <div>
-                            <div  class ='blog-diw2'>
-                        
-                            
-                                <div> <h1> {item.title} </h1>
-                                    <div class = 'content-diw2'> {item.content.substring(0,100)}...       <Link to={{
+                                    <Link to={{
                                         pathname:`/post/${item.get_absolute_url}/${item.id}`,
                                         search: ``,
                                         state:{stateParam:true},
-                                    }}>       
+                                    }}>
+                            <div  class ='blog-diw2'>
+
+
+                                <div> <h1> {item.title} </h1>
+                                    <div class = 'content-diw2'> {item.content.substring(0,100)}...
                                     <a>Więcej...</a>
-                                    
-                                    </Link> 
+
                                     </div>
 
-                           
+
 
                                  {item.photos.length>0 &&
                                   <img src = {url + item.photos[0].photos.full_size}></img>
                                 }
-                                    
-                                </div>   
+
+                                </div>
                             </div>
-                            
-                    
-                        
+                                    </Link>
+
+
+
                         <div className='przyciski'>
 
                         { localStorage.getItem('token')&&
@@ -231,29 +248,35 @@ function Blog(){
                         { localStorage.getItem('token')&&
                             <button onClick ={()=>DeletePost(item.id)}>Usun</button> }
                         </div>
-                       
+
                            </div>
                             ))}
 
                             {nextPage&&
                                     <button onClick={()=>fetchNext()}>Wiecej..</button>}
 
+                            <InfiniteScroll
+                                pageStart={0}
+                                loadMore={fetchNext}
+                                hasMore={true}
+                                loader={<div className="loader" key={0}></div>}
+                            >
+                            </InfiniteScroll>
+
                         </div>
-                        
+
                     </div>
-                                   
+
                     </div>}
                 </div>
 
             )
         }
-    
 
 
 function App2() {
     return(<div>
-        
-        <ParticlesBackground/>
+
         <div>
         <Navbar/>
         <Blog/>
@@ -262,5 +285,5 @@ function App2() {
 
     )
   }
-  
+
 export default App2;

@@ -6,7 +6,6 @@ import MemberPhoto from './aboutphoto'
 import './about.css'
 import GoogleMapReact from 'google-map-react'
 import logo from './logo.png'
-import ParticlesBackground from '../particles/particles';
 
 
 
@@ -18,7 +17,7 @@ export default function About(){
         fetch('http://127.0.0.1:8000/api/members/')
         .then(res => res.json())
         .then((res)=> setUsers(res))},[]);
- 
+
     const deleteUser = (id) => {
         fetch(`http://127.0.0.1:8000/members/delete/${id}`, {
     method: 'DELETE',
@@ -30,7 +29,6 @@ export default function About(){
 
     return (
         <div>
-            <ParticlesBackground/>
             <Navbar/>
             <div>
 
@@ -53,7 +51,7 @@ export default function About(){
 
 
 
-                        
+
 
                         </div>
 
@@ -85,9 +83,9 @@ export default function About(){
                                     </div>
                                     {localStorage.getItem('token')&&
                                     <button onClick={()=>deleteUser(user.id)}>Usuń</button>}
-                                
+
                             </div>
-                            
+
                     ))}
 
                 </div>
@@ -100,4 +98,4 @@ export default function About(){
 
 
 
-                
+

@@ -15,7 +15,7 @@
     transition: all 1s;
     width: 50px;
     height: 50px;
-    background: #661f35cc;
+    #background: #661f35cc;
     box-sizing: border-box;
     border-radius: 25px;
     border: 4px black;
@@ -52,15 +52,29 @@
     transition: all 1s;
 }
 
+.search-div form {
+    width: 200px;
+    cursor: pointer;
+}
+
 .search-div form:hover,
 .search-div form:valid{
     width: 200px;
     cursor: pointer;
 }
 
+.search-div form input {
+    display: block;
+}
+
 .search-div form:hover input,
 .search-div form:valid input{
     display: block;
+}
+
+form .fa {
+    background: #07051a;
+    color: white;
 }
 
 form:hover .fa,
