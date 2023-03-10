@@ -12,14 +12,30 @@ export default function Downloadable(){
 		.then(res => res.json()
         .then((res)=> setDownloadables(res)))}, []);
 
-	const uploadDownload = (id) => {
-        fetch(`http://127.0.0.1:8000/download/6`, {
-    method: 'GET'})
-    
-    .then(res => res.json())
-    .then((res)=> setDownloadables(res))
-    }
-	
+	const DeleteFile = (id)=>{
+            fetch(`http://127.0.0.1:8000/download/${id}`,
+                {
+                    method: 'GET',
+                    
+            })
+            .then(res=>res.json())
+            .then((res)=> setDownloadables(res))
+ 
+        }
+
+	const uploadDownload = (filename, id) => {
+        fetch(`http://127.0.0.1:8000/download/${id}`).then(
+    response => {
+      response.blob().then(blob => {
+      let url = window.URL.createObjectURL(blob);
+      let a = document.createElement("a");
+      console.log(url);
+      a.href = url;
+      a.download = filename;
+      a.click();
+    });
+  });
+}
 
 	return (
 		<div>
@@ -37,7 +53,7 @@ export default function Downloadable(){
                                     <button onClick={()=>uploadDownload(downloadable.id)}> Pobierz </button>
                                     </div>
                                     {localStorage.getItem('token')&&
-                                    <button onClick={()=>uploadDownload(downloadable.id)}>Usuń</button>}
+                                    <button onClick={()=>DeleteFile(downloadable.id)}>Usuń</button>}
 		               </div>))}
 		            </div>
 		        </div>
