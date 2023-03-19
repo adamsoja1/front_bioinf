@@ -5,12 +5,15 @@ import Navbar from '../navbar/navBar'
 import { useParams } from "react-router-dom";
 import '../blog/wyglad.css'
 import './search.css'
+import InfiniteScroll from 'react-infinite-scroller';
 
 const url = 'http://127.0.0.1:8000'
 
 export default function SearchQueryContent(){
     const [post,setPost] = useState([]);
     const [query,setQuery] = useState('');
+    const [nextPage,setNextPage] = useState([]);
+    const [items,setItems] = useState([]);
 
     
     useEffect(()=>{
@@ -19,7 +22,13 @@ export default function SearchQueryContent(){
         .then((result) => setPost(result.results))
     },[])
 
+    const fetchNext = async()=>{
 
+        const result = await fetch(nextPage)
+        const jsonResult = await result.json()
+
+        setItems(oldItems => [...oldItems,...jsonResult.results])
+        setNextPage(jsonResult.next)}
 
 
     return(
@@ -90,6 +99,19 @@ export default function SearchQueryContent(){
                    
                        </div>
                         ))}
+                        <div>
+
+
+                            {nextPage&&
+                                    <button onClick={()=>fetchNext()}>Wiecej..</button>}
+                            <InfiniteScroll
+                                pageStart={0}
+                                loadMore={fetchNext}
+                                hasMore={true}
+                                loader={<div className="loader" key={0}></div>}
+                            >
+                            </InfiniteScroll>
+                        </div>
                     
                 </div>
 

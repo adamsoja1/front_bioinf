@@ -4,7 +4,7 @@ import Navbar from '../navbar/navBar'
 import '../blog/wyglad.css'
 import { Link } from 'react-router-dom';
 import './events.css'
-
+import InfiniteScroll from 'react-infinite-scroller';
 
 const url = 'http://127.0.0.1:8000'
 
@@ -12,7 +12,8 @@ const url = 'http://127.0.0.1:8000'
 export default function Events(){
 
     const [items,setItems] = useState([]);
-    const [isLoaded,setIsLoaded] = useState(false)
+    const [isLoaded,setIsLoaded] = useState(false);
+    const [nextPage,setNextPage] = useState([]);
 
     useEffect(()=>{
         fetch('http://127.0.0.1:8000/events')
@@ -23,6 +24,13 @@ export default function Events(){
 
 
     },[]);
+    const fetchNext = async()=>{
+
+        const result = await fetch(nextPage)
+        const jsonResult = await result.json()
+
+        setItems(oldItems => [...oldItems,...jsonResult.results])
+        setNextPage(jsonResult.next)}
 
 const DeletePost = (id)=>{
             fetch(`http://127.0.0.1:8000/post/edit/${id}`,
@@ -82,11 +90,27 @@ const DeletePost = (id)=>{
                        
                            </div>
                             ))}
+                        <div>
+
+
+                            {nextPage&&
+                                    <button onClick={()=>fetchNext()}>Wiecej..</button>}
+                            <InfiniteScroll
+                                pageStart={0}
+                                loadMore={fetchNext}
+                                hasMore={true}
+                                loader={<div className="loader" key={0}></div>}
+                            >
+                            </InfiniteScroll>
+                        </div>
+
+                        
+
+                        
+
             </div>
 
 
             </div>
             </div>
-        )
-
-}
+        )}
