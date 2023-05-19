@@ -61,6 +61,6 @@ a:hover, a:active {
 .blog-diw2 img{
     
     height: 40%;
-    width:50%;
+    max-width:50%;
     max-height: 280px;
 }
