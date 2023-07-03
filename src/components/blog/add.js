@@ -24,7 +24,7 @@ const Create = () => {
   })
 
   useEffect(()=>{
-    fetch('http://127.0.0.1:8000/tags/operations', {
+    fetch(process.env.REACT_APP_HOST + '/tags/operations', {
       method: 'GET',
       headers: { Authorization : `Token ${token}`}
     })
@@ -40,7 +40,7 @@ const Create = () => {
 
 
 
-    fetch('http://127.0.0.1:8000/tags/operations', {
+    fetch(process.env.REACT_APP_HOST + '/tags/operations', {
       method: 'PUT',
       headers: { Authorization : `Token ${token}`},
       body: uploadData
@@ -71,7 +71,7 @@ const Create = () => {
 
     console.log(uploadData)
     setIsPending(true)
-    fetch('http://127.0.0.1:8000/post/add', {
+    fetch(process.env.REACT_APP_HOST + '/post/add', {
       method: 'POST',
       headers: { Authorization : `Token ${token}`},
       body: uploadData

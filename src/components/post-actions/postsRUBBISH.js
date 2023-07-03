@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import Navbar from '../navbar/navBar'
 
-const url = 'http://127.0.0.1:8000'
+const url = process.env.REACT_APP_HOST
 export default function PostRubbish(){
         const history = useHistory();
 
@@ -21,7 +21,7 @@ export default function PostRubbish(){
     const [isLoaded,setIsLoaded] = useState(false)
 
     useEffect(()=>{
-        fetch('http://127.0.0.1:8000/post/deleted')
+        fetch(process.env.REACT_APP_HOST + '/post/deleted')
         .then(res=>res.json())
         .then((res)=> setItems(res))
         .then(setIsLoaded(true))
@@ -31,7 +31,7 @@ export default function PostRubbish(){
     },[])
 
     const Deletion = (id)=>{
-        fetch(`http://127.0.0.1:8000/post/deletion/${id}`,
+        fetch(process.env.REACT_APP_HOST + `/post/deletion/${id}`,
             {
                 method: 'DELETE',
                 headers: { "Content-Type": "application/json" ,
@@ -43,7 +43,7 @@ export default function PostRubbish(){
     }
 
     const Recovery = (id) =>{
-    fetch(`http://127.0.0.1:8000/post/restore/${id}`,
+    fetch(process.env.REACT_APP_HOST + `/post/restore/${id}`,
     {
         method: 'PUT',
         headers: { "Content-Type": "application/json" ,

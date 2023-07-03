@@ -15,7 +15,7 @@ export default function ImageUpload(params){
             uploadData.append('photos',photos[i]);
         }
         setIsPending(true)
-        fetch(`http://127.0.0.1:8000/post/photo/add/${params.id}`, {
+        fetch(process.env.REACT_APP_HOST + `/post/photo/add/${params.id}`, {
           method: 'POST',
           headers: { Authorization : `Token ${localStorage.getItem('token')}`},
           body: uploadData

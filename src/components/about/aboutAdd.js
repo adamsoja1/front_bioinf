@@ -30,7 +30,7 @@ function CreateMember(){
       uploadData.append('about',about)
       uploadData.append('member_photo',photo)
       setIsPending(true)
-      fetch('http://127.0.0.1:8000/members/add', {
+      fetch(process.env.REACT_APP_HOST + '/members/add', {
         method: 'POST',
         headers: { Authorization : `Token ${localStorage.getItem('token')}`},
         body: uploadData

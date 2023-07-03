@@ -5,7 +5,7 @@ import './Modal.css'
 import './post-gallery.css'
 
 function Photos(params){
-    const apiUrl = 'http://127.0.0.1:8000'
+    const apiUrl = process.env.REACT_APP_HOST
     const [photos, setPhotos] = useState([])
     const [isLoaded,setIsLoaded] = useState(false)
     
@@ -28,7 +28,7 @@ function Photos(params){
     }
 
     useEffect(()=>{
-        fetch(`http://127.0.0.1:8000/photos/post/${params.id}`)
+        fetch(process.env.REACT_APP_HOST + `/photos/post/${params.id}`)
         .then(result => result.json())
         .then((result) => setPhotos(result))
         .then(setIsLoaded(true))
@@ -45,7 +45,7 @@ function Photos(params){
             console.log(images[i])
             uploadData.append('photos',images[i]);
         }}
-        fetch(`http://127.0.0.1:8000/post/add/photo/${params.id}`, {
+        fetch(process.env.REACT_APP_HOST + `/post/add/photo/${params.id}`, {
           method: 'POST',
           headers: { Authorization : `Token ${localStorage.getItem('token')}`},
           body: uploadData
@@ -58,7 +58,7 @@ function Photos(params){
 
       const deletePhoto = (photo_id) => {
 
-        fetch(`http://127.0.0.1:8000/photo/delete/${photo_id}/post/${params.id}`, {
+        fetch(process.env.REACT_APP_HOST + `/photo/delete/${photo_id}/post/${params.id}`, {
           method: 'DELETE',
           headers: { Authorization : `Token ${localStorage.getItem('token')}`},
         })

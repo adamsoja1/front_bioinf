@@ -6,7 +6,7 @@ import './wyglad-boxow.css'
 import { Link } from 'react-router-dom';
 import Particles from 'react-tsparticles';
 import InfiniteScroll from 'react-infinite-scroller';
-const url = 'http://127.0.0.1:8000'
+const url = process.env.REACT_APP_HOST
 
 
 
@@ -43,7 +43,7 @@ function Blog(){
     useEffect(() => {
 
         const fetchData = async () => {
-        const result = await fetch('http://127.0.0.1:8000/view-posts?p=1')
+        const result = await fetch(process.env.REACT_APP_HOST + '/view-posts?p=1')
         const jsonResult = await result.json()
 
 
@@ -60,7 +60,7 @@ function Blog(){
 
 
     useEffect(()=>{
-        fetch('http://127.0.0.1:8000/latest-posts')
+        fetch(process.env.REACT_APP_HOST + '/latest-posts')
         .then(res=>res.json())
         .then((res)=> setLastPosts(res))
         .catch((error) =>{
@@ -74,7 +74,7 @@ function Blog(){
 
 
     useEffect(()=>{
-        fetch('http://127.0.0.1:8000/most-viewed')
+        fetch(process.env.REACT_APP_HOST + '/most-viewed')
         .then(res=>res.json())
         .then((res)=> setMostViewedPosts(res))
         .catch((error) =>{
@@ -100,7 +100,7 @@ function Blog(){
     //loadMore(fetchNext);
 
  const DeletePost = (id)=>{
-            fetch(`http://127.0.0.1:8000/post/edit/${id}`,
+            fetch(process.env.REACT_APP_HOST + `/post/edit/${id}`,
                 {
                     method: 'DELETE',
                     headers: { "Content-Type": "application/json" ,

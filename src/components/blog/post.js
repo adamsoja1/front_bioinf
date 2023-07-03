@@ -17,7 +17,7 @@ function Post(props)
 
 
     useEffect(() => {
-            fetch(`http://127.0.0.1:8000/post/${id}/`)
+            fetch(process.env.REACT_APP_HOST + `/post/${id}/`)
             .then(res => res.json())
             .then((res)=> setPost(res))
             .then(setLoaded(true))

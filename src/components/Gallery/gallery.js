@@ -21,7 +21,7 @@ export default function FetchPhotos(){
 
 
     const [galery,setGalery] = useState([]);
-    const apiUrl = 'http://127.0.0.1:8000'
+    const apiUrl = process.env.REACT_APP_HOST
     const [modal, setModal] = useState(false);
     const [photo,setPhoto] = useState('');
     const [photos,setPhotos] = useState()
@@ -39,14 +39,14 @@ export default function FetchPhotos(){
         console.log(photo)
     }
     useEffect(()=>{
-        fetch('http://127.0.0.1:8000/gallery')
+        fetch(process.env.REACT_APP_HOST + '/gallery')
         .then(result => result.json())
         .then((result) => setGalery(result))
     },[])
 
 
     const deletePhoto = (id) =>{
-        fetch(`http://127.0.0.1:8000/gallery/delete/photo/${id}`,
+        fetch(process.env.REACT_APP_HOST + `/gallery/delete/photo/${id}`,
         {
             method: 'DELETE',
             headers: { "Content-Type": "application/json" ,
@@ -59,7 +59,7 @@ export default function FetchPhotos(){
         }
     
     const deleteGallery = (id) =>{
-        fetch(`http://127.0.0.1:8000/gallery/delete/${id}`,
+        fetch(process.env.REACT_APP_HOST + `/gallery/delete/${id}`,
         {
             method: 'DELETE',
             headers: { "Content-Type": "application/json" ,
@@ -77,7 +77,7 @@ export default function FetchPhotos(){
             for(let i=0;i<=photos.length;i++){
               uploadData.append('photos',photos[i]);
             }}
-        fetch(`http://127.0.0.1:8000/gallery/delete/${id}`, {
+        fetch(process.env.REACT_APP_HOST + `/gallery/delete/${id}`, {
         method: 'POST',
         headers: { Authorization : `Token ${localStorage.getItem('token')}`},
         body: uploadData

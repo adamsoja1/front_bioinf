@@ -5,9 +5,9 @@ export default function MemberPhoto(params){
 
 
     const [photos, setPhotos] = useState([])
-    const apiUrl = 'http://127.0.0.1:8000'
+    const apiUrl = process.env.REACT_APP_HOST
     useEffect(()=>{
-        fetch(`http://127.0.0.1:8000/photos/member/${params.id}`)
+        fetch(process.env.REACT_APP_HOST + `/photos/member/${params.id}`)
         .then(result => result.json())
         .then((result) => setPhotos(result))
     },[])

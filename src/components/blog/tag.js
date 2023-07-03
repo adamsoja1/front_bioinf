@@ -6,7 +6,7 @@ import Navbar from '../navbar/navBar'
 import './wyglad.css'
 import './tag.css'
 
-const url = 'http://127.0.0.1:8000'
+const url = process.env.REACT_APP_HOST
 
 
  export default function GetPostByTag(){
@@ -16,7 +16,7 @@ const url = 'http://127.0.0.1:8000'
     const [isLoaded,setIsLoaded] = useState(false)
 
     useEffect(()=>{
-        fetch(`http://127.0.0.1:8000/filter/post/${nazwa}`)
+        fetch(process.env.REACT_APP_HOST + `/filter/post/${nazwa}`)
         .then(result => result.json())
         .then((result) => setItems(result))
         .catch((error) =>{
