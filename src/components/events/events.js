@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import './events.css'
 import InfiniteScroll from 'react-infinite-scroller';
 
-const url = 'http://127.0.0.1:8000'
+const url = process.env.REACT_APP_HOST
 
 
 export default function Events(){
@@ -16,7 +16,7 @@ export default function Events(){
     const [nextPage,setNextPage] = useState([]);
 
     useEffect(()=>{
-        fetch('http://127.0.0.1:8000/events')
+        fetch(process.env.REACT_APP_HOST + '/events')
 
         .then(result=>result.json())
         .then((result)=>setItems(result))
@@ -33,7 +33,7 @@ export default function Events(){
         setNextPage(jsonResult.next)}
 
 const DeletePost = (id)=>{
-            fetch(`http://127.0.0.1:8000/post/edit/${id}`,
+            fetch(process.env.REACT_APP_HOST + `/post/edit/${id}`,
                 {
                     method: 'DELETE',
                     headers: { "Content-Type": "application/json" ,

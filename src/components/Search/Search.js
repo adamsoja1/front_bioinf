@@ -7,7 +7,7 @@ import '../blog/wyglad.css'
 import './search.css'
 import InfiniteScroll from 'react-infinite-scroller';
 
-const url = 'http://127.0.0.1:8000'
+const url = process.env.REACT_APP_HOST
 
 export default function SearchQueryContent(){
     const [post,setPost] = useState([]);
@@ -17,7 +17,7 @@ export default function SearchQueryContent(){
 
     
     useEffect(()=>{
-        fetch('http://127.0.0.1:8000/view-posts')
+        fetch(process.env.REACT_APP_HOST + '/view-posts')
         .then(result => result.json())
         .then((result) => setPost(result.results))
     },[])

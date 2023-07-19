@@ -30,7 +30,7 @@ export default function EditPost(params){
         useEffect(() => {
 
             const fetchData = async () => {
-            const result = await fetch(`http://127.0.0.1:8000/post/${id}/`)
+            const result = await fetch(process.env.REACT_APP_HOST + `/post/${id}/`)
             const jsonResult = await result.json()
                     setTitle(jsonResult.title)
                     setContent(jsonResult.content)
@@ -66,7 +66,7 @@ const handleSubmit = () => {
   const blog = { title, content, author, event };
   setIsPending(true)
 
-  fetch(`http://127.0.0.1:8000/post/edit/${id}`, {
+  fetch(process.env.REACT_APP_HOST + `/post/edit/${id}`, {
     method: 'PUT',
     headers: { "Content-Type": "application/json" ,
                 Authorization : `Token ${token}`},

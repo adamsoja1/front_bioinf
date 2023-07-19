@@ -24,24 +24,24 @@ const Create = () => {
   })
 
   useEffect(()=>{
-    fetch('http://127.0.0.1:8000/tags/operations', {
-      method: 'GET',    
+    fetch(process.env.REACT_APP_HOST + '/tags/operations', {
+      method: 'GET',
       headers: { Authorization : `Token ${token}`}
     })
     .then(res=>res.json())
     .then((res)=>setTags(res))
   },[])
-  
+
 
   const addNewtags = () =>{
     const uploadData = new FormData();
-  
-    uploadData.append('tagi',newtag)
-  
+
+    uploadData.append('tagi', newtag)
 
 
-    fetch('http://127.0.0.1:8000/tags/operations', {
-      method: 'POST',    
+
+    fetch(process.env.REACT_APP_HOST + '/tags/operations', {
+      method: 'PUT',
       headers: { Authorization : `Token ${token}`},
       body: uploadData
     })
@@ -61,9 +61,9 @@ const Create = () => {
     uploadData.append('author',author)
     uploadData.append('event',event)
 
-    
+
     uploadData.append('tag',put_tag)
-  
+
     if(photos != undefined){
       for(let i=0;i<=photos.length;i++){
         uploadData.append('photos',photos[i]);
@@ -71,8 +71,8 @@ const Create = () => {
 
     console.log(uploadData)
     setIsPending(true)
-    fetch('http://127.0.0.1:8000/post/add', {
-      method: 'POST',    
+    fetch(process.env.REACT_APP_HOST + '/post/add', {
+      method: 'POST',
       headers: { Authorization : `Token ${token}`},
       body: uploadData
     }).then(() => {
@@ -82,8 +82,8 @@ const Create = () => {
     .catch((error) =>{
       setIsPending(false)
   })
-    
-  } 
+
+  }
 
   const appendToUpload = (tag) =>{
     if (!put_tag.includes(tag)){
@@ -100,21 +100,21 @@ const Create = () => {
     }
     setPut_tag(()=>[arr])
   }
-  
+
   console.log(put_tag)
   return (
     <div class="container" id='rozmiar'>
-      
+
       <div class = 'mb-3' id='rozmiar'>
-   
+
         <div class = 'mb-3'>
         <label for= "exampleFormControlInput1" class="form-label">Tytuł posta:</label>
         <input
-          id='shadow-add' 
-          type="text" 
+          id='shadow-add'
+          type="text"
           class='form-control'
           placeholder="Tytuł.."
-          required 
+          required
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
@@ -122,7 +122,7 @@ const Create = () => {
         <div class ='mb-3'>
         <label for='exampleFormControlTextarea1' class="form-label">Tekst posta:</label>
         <textarea
-        id='shadow-add' 
+        id='shadow-add'
         class="form-control"  rows="3"
           required
           value={content}
@@ -131,17 +131,17 @@ const Create = () => {
         </div>
         <div class = 'mb-3'>
         <label for= "exampleFormControlInput1" class="form-label">Autor:</label>
-        <input 
-        id='shadow-add' 
-          type="text" 
-          class='form-control'         
-          required 
+        <input
+        id='shadow-add'
+          type="text"
+          class='form-control'
+          required
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
         />
 
         </div>
-        
+
         <div class="form-check">
         <input class="form-check-input" type="checkbox" id="flexCheckDefault" value={event} onChange = {(e) => setEvent(!event)}
         required/>
@@ -153,17 +153,17 @@ const Create = () => {
 
         <br/>
         <label>
-        
+
           <input type="file" multiple onChange={(e) => setPhotos(e.target.files)}/>
         </label>
         <br/>
         </div>
-      
+
         <center>
         {!isPending && <button type='submit' onClick={()=>handleSubmit()} id='shadow-add' class = 'btn btn-primary'>Dodaj post</button>}
         { isPending && <button disabled  class = 'btn btn-primary'>Dodawanie...</button>}
         </center>
-      
+
             <div>
 
             <div>
@@ -173,15 +173,15 @@ const Create = () => {
               />
               <button onClick={()=>addNewtags()}>Dodaj</button>
             </div>
-            
-          
+
+
         <div className='tags-left'>
            <h3>Dostepne tagi:</h3>
               {tags.map(tag=>(
                 <div>
                  <h7 onClick = {()=>appendToUpload(tag.tagi)}>{tag.tagi}</h7>
                  </div>
-                  
+
               ))}
             </div>
             <div className='tags-right'>
@@ -190,7 +190,7 @@ const Create = () => {
                 <div>
                  <h7 onClick = {()=>deleteFromUpload(tags)}>{tags}</h7>
                  </div>
-                  
+
               ))}
           </div>
             </div>
@@ -207,7 +207,7 @@ function Add() {
       <h1 class="display-4">Dodaj nowy post</h1>
       </div>
       <Create/>
-    
+
     </div>
     </div>
   )

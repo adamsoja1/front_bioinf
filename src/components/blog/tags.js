@@ -11,7 +11,7 @@ export default function Tag(params){
 
 
     useEffect(()=>{
-        fetch(`http://127.0.0.1:8000/tags/post/${params.id}`)
+        fetch(process.env.REACT_APP_HOST + `/tags/post/${params.id}`)
         .then(result=>result.json())
         .then((result)=>setTags(result))
         .catch((error)=>{

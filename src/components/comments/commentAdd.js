@@ -18,7 +18,7 @@ function Comment(params)
     useEffect(() => {
         
         const fetchData = async () => {
-        const result = await fetch(`http://127.0.0.1:8000/comments/post/${params.numer}/`)
+        const result = await fetch(process.env.REACT_APP_HOST + `/comments/post/${params.numer}/`)
         const jsonResult = await result.json()
         
         
@@ -40,7 +40,7 @@ function Comment(params)
         e.preventDefault();
         const commentts = { content, User, post };
         setIsPending(true)
-        const result =await fetch('http://127.0.0.1:8000/api/comment/', {
+        const result =await fetch(process.env.REACT_APP_HOST + '/api/comment/', {
           method: 'POST',
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(commentts)

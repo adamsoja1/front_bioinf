@@ -8,7 +8,7 @@ export default function Allcomments(){
     const [comments,setComments] = useState([])
 
     useEffect(()=>{
-        fetch('http://127.0.0.1:8000/comments/get', {
+        fetch(process.env.REACT_APP_HOST + '/comments/get', {
             method: 'GET',
             headers: { Authorization : `Token ${localStorage.getItem('token')}`},
           })
@@ -17,7 +17,7 @@ export default function Allcomments(){
     },[])
 
     const deleteComment = (id) =>{
-        fetch(`http://127.0.0.1:8000/comments/delete/${id}`, {
+        fetch(process.env.REACT_APP_HOST + `/comments/delete/${id}`, {
             method: 'DELETE',
             headers: { Authorization : `Token ${localStorage.getItem('token')}`},
           })

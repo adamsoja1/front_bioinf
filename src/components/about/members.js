@@ -2,12 +2,12 @@ import React from 'react';
 import {useState,useEffect} from 'react';
 import Navbar from '../navbar/navBar'
 
-export default function registeredMembers(){
+export default function RegisteredMembers(){
 
     const [members,setMembers] = useState([])
 
     useEffect(()=>{
-        fetch('http://127.0.0.1:8000/get-club-members', {
+        fetch(process.env.REACT_APP_HOST + '/get-club-members', {
             method: 'GET',
             headers: { Authorization : `Token ${localStorage.getItem('token')}`},
           })

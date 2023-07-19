@@ -8,12 +8,12 @@ export default function Downloadable(){
 	const [downloadables, setDownloadables] = useState([])
 
 	useEffect(() =>{
-		fetch('http://127.0.0.1:8000/download')
+		fetch(process.env.REACT_APP_HOST + '/download')
 		.then(res => res.json()
         .then((res)=> setDownloadables(res)))}, []);
 
 	const DeleteFile = (id)=>{
-            fetch(`http://127.0.0.1:8000/download/${id}`,
+            fetch(process.env.REACT_APP_HOST + `/download/${id}`,
                 {
                     method: 'GET',
 
@@ -24,7 +24,7 @@ export default function Downloadable(){
         }
 
 	const uploadDownload = (filename, id) => {
-        fetch(`http://127.0.0.1:8000/download/${id}`).then(
+        fetch(process.env.REACT_APP_HOST + `/download/${id}`).then(
     response => {
       response.blob().then(blob => {
       let url = window.URL.createObjectURL(blob);
