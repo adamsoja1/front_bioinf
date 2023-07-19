@@ -54,18 +54,17 @@ const DeletePost = (id)=>{
             <div>
                 {items.map(item=>(                                               
                         <div>
-                            <div  class ='blog-diw2'>
-                        
-                            
-                                <div> <h1> {item.title} </h1>
-                                    <div class = 'content-diw2'> {item.content.substring(0,100)}...       <Link to={{
+                        <Link to={{
                                         pathname:`/post/${item.get_absolute_url}/${item.id}`,
                                         search: ``,
                                         state:{stateParam:true},
                                     }}>       
-                                    <a>Więcej...</a>
+                            <div  class ='blog-diw2'>                            
+                                <div> <h1> {item.title} </h1>
+                                    <div class = 'content-diw2'> {item.content.substring(0,100)}...
+                                    <a>...</a>
+
                                     
-                                    </Link> 
                                     </div>
 
                            
@@ -76,7 +75,7 @@ const DeletePost = (id)=>{
                                     
                                 </div>   
                             </div>
-                            
+                            </Link> 
                     
                         
                         <div className='przyciski'>

@@ -65,17 +65,17 @@ export default function SearchQueryContent(){
 
                         
                         <div  class ='blog-diw2'>
-                    
-                        
-                            <div> <h1> {item.title} </h1>
-                              <div class = 'content-diw2'> {item.content.substring(0,100)}...       <Link to={{
+                        <Link to={{
                                     pathname:`/post/${item.get_absolute_url}/${item.id}`,
                                     search: ``,
                                     state:{stateParam:true},
                             }}>       
-                                <a>Więcej...</a>
+                    
+                        
+                            <div> <h1> {item.title} </h1>
+                              <div class = 'content-diw2'> {item.content.substring(0,100)}...       
+                                <a>...</a>
                                 
-                                </Link> 
                               </div>
 
                        
@@ -84,18 +84,12 @@ export default function SearchQueryContent(){
                               <img src = {url + item.photos[0].photos.full_size}></img>
                             }
 
-
-                              
-
-
-                                
+ 
                             </div>   
+                            </Link>
                             
                         </div>
                         
-                
-                    
-                    
                    
                        </div>
                         ))}
@@ -103,7 +97,7 @@ export default function SearchQueryContent(){
 
 
                             {nextPage&&
-                                    <button onClick={()=>fetchNext()}>Wiecej..</button>}
+                                    <button hidden onClick={()=>fetchNext()}>Wiecej..</button>}
                             <InfiniteScroll
                                 pageStart={0}
                                 loadMore={fetchNext}
@@ -117,6 +111,6 @@ export default function SearchQueryContent(){
 
             </div>
             </div>
-        )
+    )
 
 }

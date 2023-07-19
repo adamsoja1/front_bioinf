@@ -224,7 +224,7 @@ function Blog(){
 
                                 <div> <h1> {item.title} </h1>
                                     <div class = 'content-diw2'> {item.content.substring(0,100)}...
-                                    <a>Więcej...</a>
+                                    <a>...</a>
 
                                     </div>
 
@@ -253,7 +253,7 @@ function Blog(){
                             ))}
 
                             {nextPage&&
-                                    <button onClick={()=>fetchNext()}>Wiecej..</button>}
+                                    <button hidden onClick={()=>fetchNext()}>Wiecej..</button>}
 
                             <InfiniteScroll
                                 pageStart={0}
@@ -276,7 +276,6 @@ function Blog(){
 
 function App2() {
     return(<div>
-
         <div>
         <Navbar/>
         <Blog/>
