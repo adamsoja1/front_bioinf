@@ -19,15 +19,13 @@ function Post(props)
     useEffect(() => {
             fetch(process.env.REACT_APP_HOST + `/post/${id}/`)
             .then(res => res.json())
-            .then((res)=> setPost(res))
+            //.then((res)=> {alert(JSON.stringify(res));setPost(res)})
+            .then((res)=> {res.content= res.content.split("\n").join("<br />"); setPost(res)})
             .then(setLoaded(true))
           
         },[]);
+
      
-
- 
-        
-
 
     return(
         <div>  

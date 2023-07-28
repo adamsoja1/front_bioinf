@@ -93,7 +93,7 @@ const DeletePost = (id)=>{
 
 
                             {nextPage&&
-                                    <button onClick={()=>fetchNext()}>Wiecej..</button>}
+                                    <button hidden onClick={()=>fetchNext()}>Wiecej..</button>}
                             <InfiniteScroll
                                 pageStart={0}
                                 loadMore={fetchNext}
