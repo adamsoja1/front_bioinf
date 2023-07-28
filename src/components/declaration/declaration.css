@@ -9,8 +9,8 @@
     border-radius: 0px;
     box-shadow: 1px 0px 5px rgba(66,66,66,.60);
     text-shadow: -50px 0px 0px rgba(66,66,66,.0);
-    margin-top:30px;
-    margin-bottom: 30px;
+    margin-top:50px;
+    /*margin-bottom: 30px;*/
 }
 .css-input:focus {
     padding: 6px;

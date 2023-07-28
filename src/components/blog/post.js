@@ -10,7 +10,7 @@ import ImageUpload from './add-photo'
 import { Link } from 'react-router-dom';
 function Post(props)
 {
-    
+
     const {id} = useParams();
     const [post, setPost] = useState('');
     const [loaded,setLoaded] = useState(false)
@@ -19,68 +19,67 @@ function Post(props)
     useEffect(() => {
             fetch(process.env.REACT_APP_HOST + `/post/${id}/`)
             .then(res => res.json())
-            //.then((res)=> {alert(JSON.stringify(res));setPost(res)})
+            //.then((res)=> {setPost(res)})
             .then((res)=> {res.content= res.content.split("\n").join("<br />"); setPost(res)})
             .then(setLoaded(true))
-          
+
         },[]);
 
-     
+
 
     return(
-        <div>  
+        <div>
             <Navbar/>
             {!loaded &&
                     <div>
-                                
+
                     <div>
-                    <center> 
+                    <center>
                         <h2>Ładuję ...</h2>
                     </center>
                     </div>
                     <center>
                 <div class="spinner-border" role="status"></div>
-                    </center>     
+                    </center>
                     </div>
             }
             {loaded &&
                 <div class = 'disp'>
-                    
+
                     {localStorage.getItem('token')&&
                         <h4><Link to={`/edit/post/${post.id}`}>Edytuj</Link></h4>
     }
-                    <h3 class = 'display-4'> <b>{post.title}</b>  </h3> 
+                    <h3 class = 'display-4'> <b>{post.title}</b>  </h3>
                     <h8> {post.get_time_display}</h8>
                       <div className='display-content'>
-                          <p>
-                          {post.content} 
+                          <p dangerouslySetInnerHTML={{__html: post.content}}>
                           </p>
-                          </div>   
-                          <h6>Wyswietlenia: {post.views} </h6>       
-     
+                          </div>
+                          <h6>Wyswietlenia: {post.views} </h6>
+
                         <Photos id = {id}/>
-                     
-                 </div> 
+
+                 </div>
 }
                  <div>
                  <Tag id ={id}/>
                  </div>
                  <br/>
             <div>
-                
+
             </div>
 
             Spodobał się post? Skomentuj!
             <div class = 'comm'>
-                 
+
                      <Comment numer = {id}/>
                 </div>
-            </div>       
+            </div>
 
-                 
-                 
-            
-        
+
+
+
+
         )
 
 

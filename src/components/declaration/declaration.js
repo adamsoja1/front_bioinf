@@ -100,9 +100,8 @@ export default function Declaration(){
 
                 <div>
                     <center>
-                        <h7> Zgoda na rodo </h7>
                         <input id="mybox" required value={subscription} onChange={true_false} type="checkbox" class="css-input"/>
-
+                        &nbsp;Wyrażam zgodę na przetwarzanie moich danych osobowych podanych w powyższym formularzu dla celów rekrutacyjnych przez Bioinformatyczne Studenckie Koło Naukowe (BioSKN).
                     </center>
                 </div>
                 <center>
