@@ -60,6 +60,9 @@ div.gallery {
 
 .display-content{
   min-height:400px;
+}
 
+.display-content p {
+    text-align: left;
 }
 

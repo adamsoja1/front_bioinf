@@ -29,7 +29,7 @@ export default function FetchPhotos(){
     const toggleModal = () => {
         setModal(!modal);
       };
-    
+
     function togglePhoto(photo){
         setPhoto(photo);
         setModal(true)
@@ -51,24 +51,24 @@ export default function FetchPhotos(){
             method: 'DELETE',
             headers: { "Content-Type": "application/json" ,
                         Authorization : `Token ${localStorage.getItem('token')}`},
-    
+
             })
             .then(res=>res.json())
             .then((res)=> setGalery(res))
-    
+
         }
-    
+
     const deleteGallery = (id) =>{
         fetch(process.env.REACT_APP_HOST + `/gallery/delete/${id}`,
         {
             method: 'DELETE',
             headers: { "Content-Type": "application/json" ,
                         Authorization : `Token ${localStorage.getItem('token')}`},
-    
+
             })
             .then(res=>res.json())
             .then((res)=> setGalery(res))
-    
+
         }
 
     const addPhotos = (id) =>{
@@ -86,14 +86,14 @@ export default function FetchPhotos(){
             .then((res)=> setGalery(res))
 
     }
-    
+
 
     return(
        <div>
            <Navbar/>
-           
+
             <div>
-                
+
                 {galery.map(galer=>(
                     <div>
                         <br/>
@@ -101,20 +101,20 @@ export default function FetchPhotos(){
                     <div>
                         <input type="file" multiple onChange={(e) => setPhotos(e.target.files)}/>
                     <button onClick = {()=>addPhotos(galer.id)}>Dodaj zdjecia</button>
-                    </div>}   
+                    </div>}
                     <h2>{galer.OpisGalerii}</h2>
                     <h7>{galer.date}</h7>
                     <br/>
-               
-                    <div className = 'parent'> 
+
+                    <div className = 'parent'>
                     {galer.gallery_photos.map(photo=>(
-                        
+
                         <div className = 'gallery'>
                         <img src = {apiUrl + photo.photos.full_size} onClick = {()=> togglePhoto(photo.photos.full_size)}></img>
                         {localStorage.getItem('token')&&
                         <button onClick = {()=>deletePhoto(photo.id)}>Usun</button>}
                         <br/>
-                        
+
                         </div>
 
 
@@ -129,11 +129,11 @@ export default function FetchPhotos(){
                     <button onClick = {()=>deleteGallery(galer.id)}>Usuń galerie</button>
                     </div>}
                     </div>
-                    
+
                 ))}
                 </div>
-                    
-              {modal && <div className='overlay' onClick = {toggleModal}>   
+
+              {modal && <div className='overlay' onClick = {toggleModal}>
                             <div onClick = {toggleModal}></div>
                             <div className = 'modal-content' onClick = {toggleModal}>
 
@@ -142,13 +142,13 @@ export default function FetchPhotos(){
                                             X
                             </button>
                                 </div>
-                            
-                            
-                            
+
+
+
                             </div>}
 
             </div>
-       
+
     )
 }
 
