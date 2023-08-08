@@ -32,7 +32,7 @@ export default function Events(){
         setItems(oldItems => [...oldItems,...jsonResult.results])
         setNextPage(jsonResult.next)}
 
-const DeletePost = (id)=>{
+    const DeletePost = (id)=>{
             fetch(process.env.REACT_APP_HOST + `/post/edit/${id}`,
                 {
                     method: 'DELETE',
@@ -55,9 +55,9 @@ const DeletePost = (id)=>{
                 {items.map(item=>(                                               
                         <div>
                         <Link to={{
-                                        pathname:`/post/${item.get_absolute_url}/${item.id}`,
-                                        search: ``,
-                                        state:{stateParam:true},
+                                    pathname:`/post/${item.get_absolute_url}/${item.id}`,
+                                    search: ``,
+                                    state:{stateParam:true},
                                     }}>       
                             <div  class ='blog-diw2'>                            
                                 <div> <h1> {item.title} </h1>
@@ -102,14 +102,7 @@ const DeletePost = (id)=>{
                             >
                             </InfiniteScroll>
                         </div>
-
-                        
-
-                        
-
             </div>
-
-
             </div>
             </div>
         )}
